@@ -285,7 +285,7 @@ const LandingFlow = ({ onStartEligibility, onCategorySelect }) => {
               pointerEvents: 'auto',
             }}
             onClick={() => onCategorySelect(data.category)}
-            title={`View ${data.category} schemes`}
+            title={t('landing.viewCategory', { category: t(`categories.${data.category}`) })}
           >
             <img
               src={data.src}

@@ -77,7 +77,7 @@ const SectionCTA = ({ onStart }) => {
 
       {/* Scroll indicator for FAQs below */}
       <div className="absolute bottom-8 inset-x-0 mx-auto w-fit flex flex-col items-center gap-2 animate-bounce">
-        <span className="text-base md:text-lg font-semibold text-textSecondary tracking-wider">FAQs</span>
+        <span className="text-base md:text-lg font-semibold text-textSecondary tracking-wider">{t('faq.titleBadge')}</span>
         <FaChevronDown className="text-textSecondary text-xl" />
       </div>
     </section>
