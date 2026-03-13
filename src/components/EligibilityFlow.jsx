@@ -96,73 +96,99 @@ const EligibilityFlow = ({ onBack }) => {
   };
 
   const calculateResults = () => {
+    // Helper: check if a user's answer matches a scheme rule value
+    const doesMatch = (userAnswer, ruleValue) => {
+      if (Array.isArray(ruleValue)) {
+        return ruleValue.includes(userAnswer);
+      }
+      return userAnswer === ruleValue;
+    };
+
+    // Helper: find the question ID for a given field name
+    const findQuestionId = (field) => {
+      return Object.keys(questionsData.questions).find(
+        qId => questionsData.questions[qId].field === field
+      );
+    };
+
+    // HARD BLOCKERS: If the user answered these and they don't match, reject the scheme instantly.
+    // This prevents male users from seeing women-only schemes, users with no children from seeing child schemes, etc.
+    const hardBlockerFields = [
+      'gender', 'age_group', 'occupation', 'girl_child', 
+      'children_under10', 'residence', 'interest', 'bank_account'
+    ];
+
     return schemesData.schemes.filter(scheme => {
-      // If the scheme has specific eligibility criteria
-      if (scheme.eligibility) {
-        let matchCount = 0;
-        let failCount = 0;
-        let totalAnswered = 0;
+      if (!scheme.eligibility) return true;
 
-        // Loop through all criteria keys (e.g., 'income', 'bpl', 'age_group')
-        for (const [key, value] of Object.entries(scheme.eligibility)) {
-          // If the key exists in our answers map
-          // Some keys might map slightly differently, e.g., documents is a multi_select
+      // ── Phase 1: Hard blockers ──
+      for (const field of hardBlockerFields) {
+        const ruleValue = scheme.eligibility[field];
+        if (ruleValue === undefined) continue; // scheme doesn't care about this field
 
-          if (key === 'documents') {
-            // value is an array of REQUIRED documents, e.g. ["aadhaar", "ration_card"]
-            const docAnswer = answers['Q23']; // Q23 is documents in questions.json
-            if (docAnswer !== undefined) {
-              totalAnswered++;
-              const userDocs = docAnswer || [];
-              const hasAllRequired = value.every(reqDoc => userDocs.includes(reqDoc));
-              if (hasAllRequired) {
-                matchCount++;
-              } else {
-                failCount++;
-              }
-            }
-            continue;
-          }
+        const questionId = findQuestionId(field);
+        if (!questionId) continue; // field not in questionnaire
 
-          // Let's find if the user answered the question matching this field
-          const questionId = Object.keys(questionsData.questions).find(
-            qId => questionsData.questions[qId].field === key
-          );
+        const userAnswer = answers[questionId];
+        if (userAnswer === undefined || userAnswer === null || userAnswer === '') continue; // user didn't answer → skip, don't block
 
-          if (questionId) {
-            const userAnswer = answers[questionId];
-
-            if (userAnswer !== undefined && userAnswer !== null && userAnswer !== '') {
-              totalAnswered++;
-              // If the required criteria is an array of allowed values
-              if (Array.isArray(value)) {
-                if (value.includes(userAnswer)) {
-                  matchCount++;
-                } else {
-                  failCount++;
-                }
-              } else {
-                // Exact string match
-                if (userAnswer === value) {
-                  matchCount++;
-                } else {
-                  failCount++;
-                }
-              }
-            }
-          }
+        if (!doesMatch(userAnswer, ruleValue)) {
+          return false; // HARD REJECT — user answered and it doesn't match
         }
-
-        // The scheme should be considered eligible if the majority of eligibility conditions match the user answers.
-        // If no criteria were answered, we'll consider it eligible (or you could change this to require at least 1 match)
-        if (totalAnswered > 0) {
-          return matchCount >= failCount;
-        }
-
-        return true;
       }
 
-      return true; // Default to true if no specific eligibility block
+      // ── Phase 2: Soft scoring for remaining fields ──
+      const softFields = Object.keys(scheme.eligibility).filter(
+        k => !hardBlockerFields.includes(k)
+      );
+
+      if (softFields.length === 0) return true; // all rules were hard-blockers and they passed
+
+      let softMatch = 0;
+      let softFail = 0;
+      let softAnswered = 0;
+
+      for (const key of softFields) {
+        const ruleValue = scheme.eligibility[key];
+
+        if (key === 'documents') {
+          // documents field is special (multi_select)
+          const docQId = findQuestionId('documents');
+          if (docQId) {
+            const docAnswer = answers[docQId];
+            if (docAnswer !== undefined) {
+              softAnswered++;
+              const userDocs = docAnswer || [];
+              if (ruleValue.every(reqDoc => userDocs.includes(reqDoc))) {
+                softMatch++;
+              } else {
+                softFail++;
+              }
+            }
+          }
+          continue;
+        }
+
+        const questionId = findQuestionId(key);
+        if (!questionId) continue;
+
+        const userAnswer = answers[questionId];
+        if (userAnswer === undefined || userAnswer === null || userAnswer === '') continue;
+
+        softAnswered++;
+        if (doesMatch(userAnswer, ruleValue)) {
+          softMatch++;
+        } else {
+          softFail++;
+        }
+      }
+
+      // If user answered at least one soft field, require majority match
+      if (softAnswered > 0) {
+        return softMatch >= softFail;
+      }
+
+      return true; // no soft fields were answered, hard blockers already passed
     });
   };
 
@@ -202,10 +228,9 @@ const EligibilityFlow = ({ onBack }) => {
             <div className="space-y-6">
               {results.map((scheme, i) => (
                 <div key={scheme.id} className="p-6 border border-gray-100 rounded-xl bg-gray-50 hover:shadow-md transition-shadow flow-enter-child" style={{ '--child-i': i + 2 }}>
-                  <span className="text-sm font-bold text-primary bg-indigo-50 px-3 py-1 rounded-full mb-3 inline-block">{scheme.category}</span>
-                  <h3 className="text-xl font-bold mb-2">{scheme.name}</h3>
-                  <p className="text-textSecondary mb-4 text-sm">{scheme.benefit}</p>
-                  {scheme.notes && <p className="text-xs text-gray-400">{t('eligibility.note')}: {scheme.notes}</p>}
+                  <span className="text-sm font-bold text-primary bg-indigo-50 px-3 py-1 rounded-full mb-3 inline-block">{t(scheme.scheme_category)}</span>
+                  <h3 className="text-xl font-bold mb-2">{t(scheme.scheme_name)}</h3>
+                  <p className="text-textSecondary mb-4 text-sm">{t(scheme.scheme_benefit)}</p>
                 </div>
               ))}
             </div>
@@ -236,13 +261,13 @@ const EligibilityFlow = ({ onBack }) => {
             <FaArrowLeft className="mr-2" /> {t('eligibility.back')}
           </button>
           <div className="text-sm font-semibold text-primary bg-indigo-50 px-4 py-1.5 rounded-full">
-            {t('eligibility.step', { current: currentTile, total: 9 })}
+            {t('eligibility.step', { current: currentTile, total: 6 })}
           </div>
         </div>
 
         <div className="bg-white p-6 md:p-10 rounded-3xl shadow-lg border border-gray-100 flow-enter-child" style={{ '--child-i': 1 }}>
           <div className="mb-8 w-full bg-gray-100 h-2 rounded-full overflow-hidden">
-            <div className="bg-primary h-full transition-all duration-300" style={{ width: `${(currentTile / 9) * 100}%` }}></div>
+            <div className="bg-primary h-full transition-all duration-300" style={{ width: `${(currentTile / 6) * 100}%` }}></div>
           </div>
 
           <div className="space-y-10">
@@ -250,7 +275,7 @@ const EligibilityFlow = ({ onBack }) => {
               const isActive = idx === visibleQuestions.length - 1;
               return (
                 <div key={q.id} className={`transition-opacity duration-300 ${!isActive ? 'opacity-60' : 'opacity-100'}`}>
-                  <h3 className="text-xl md:text-2xl font-bold text-textPrimary mb-6">{q.text}</h3>
+                  <h3 className="text-xl md:text-2xl font-bold text-textPrimary mb-6">{t(q.question_title)}</h3>
 
                   {q.type === 'dropdown' ? (
                     <select
@@ -258,10 +283,10 @@ const EligibilityFlow = ({ onBack }) => {
                       value={answers[q.id] || ''}
                       onChange={(e) => handleAnswer(q.id, e.target.value, 'dropdown')}
                     >
-                      <option value="" disabled>Select an option</option>
+                      <option value="" disabled>{t('eligibility.selectOption')}</option>
                       {q.options.map(opt => (
-                        <option key={opt.value || opt} value={opt.value || opt}>
-                          {opt.label || opt}
+                        <option key={opt.value} value={opt.value}>
+                          {t(opt.option_label)}
                         </option>
                       ))}
                     </select>
@@ -269,25 +294,25 @@ const EligibilityFlow = ({ onBack }) => {
                     <input
                       type="text"
                       className="w-full border-2 border-gray-200 rounded-xl p-4 text-lg focus:border-primary focus:ring-0 outline-none transition-colors"
-                      placeholder="Enter your answer"
+                      placeholder={t('eligibility.enterAnswer')}
                       value={answers[q.id] || ''}
                       onChange={(e) => handleAnswer(q.id, e.target.value, 'text')}
                     />
                   ) : q.type === 'multi_select' ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {q.options.map(opt => {
-                        const isSelected = (answers[q.id] || []).includes(opt.value || opt);
+                        const isSelected = (answers[q.id] || []).includes(opt.value);
                         return (
                           <button
-                            key={opt.value || opt}
-                            onClick={() => handleAnswer(q.id, opt.value || opt, 'multi_select')}
+                            key={opt.value}
+                            onClick={() => handleAnswer(q.id, opt.value, 'multi_select')}
                             className={`p-4 border-2 rounded-xl text-left font-semibold transition-all ${isSelected
                               ? 'border-primary bg-indigo-50 text-primary'
                               : 'border-gray-200 hover:border-indigo-200 hover:bg-gray-50 text-textSecondary'
                               }`}
                           >
                             <div className="flex items-center justify-between">
-                              <span>{opt.label || opt}</span>
+                              <span>{t(opt.option_label)}</span>
                               <div className={`w-5 h-5 rounded flex items-center justify-center border ${isSelected ? 'border-primary bg-primary' : 'border-gray-300'}`}>
                                 {isSelected && <FaCheckCircle className="text-white text-xs" />}
                               </div>
@@ -309,7 +334,7 @@ const EligibilityFlow = ({ onBack }) => {
                               : 'border-gray-200 hover:border-indigo-200 hover:bg-gray-50 text-textSecondary'
                               }`}
                           >
-                            {opt.label}
+                            {t(opt.option_label)}
                           </button>
                         );
                       })}
