@@ -84,8 +84,7 @@ const EligibilityFlow = ({ onBack }) => {
 
   const calculateResults = () => {
     return schemesData.schemes.filter(scheme => {
-      // Very basic eligibility matching block for demonstration
-      return true; // Return all for now, as logic dictates specific fields we need an intensive filter
+      return true;
     });
   };
 
@@ -108,12 +107,12 @@ const EligibilityFlow = ({ onBack }) => {
     const results = calculateResults();
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col items-center py-10 px-4 z-50 relative">
-        <div className="w-full max-w-3xl">
-          <button onClick={() => setIsFinished(false)} className="text-primary flex items-center mb-6 hover:underline font-semibold">
+        <div key="results" className="w-full max-w-3xl flow-enter">
+          <button onClick={() => setIsFinished(false)} className="text-primary flex items-center mb-6 hover:underline font-semibold flow-enter-child" style={{ '--child-i': 0 }}>
             <FaArrowLeft className="mr-2" /> Back to questions
           </button>
           
-          <div className="bg-white p-6 md:p-10 rounded-2xl shadow-xl border border-gray-100 mb-8">
+          <div className="bg-white p-6 md:p-10 rounded-2xl shadow-xl border border-gray-100 mb-8 flow-enter-child" style={{ '--child-i': 1 }}>
             <div className="flex items-center space-x-4 mb-6">
               <FaCheckCircle className="text-4xl text-green-500" />
               <h2 className="text-2xl md:text-3xl font-bold text-textPrimary">Here are your eligible schemes</h2>
@@ -121,8 +120,8 @@ const EligibilityFlow = ({ onBack }) => {
             <p className="text-textSecondary mb-8 text-lg">Based on your answers, we found {results.length} schemes you might be eligible for.</p>
 
             <div className="space-y-6">
-              {results.map(scheme => (
-                <div key={scheme.id} className="p-6 border border-gray-100 rounded-xl bg-gray-50 hover:shadow-md transition-shadow">
+              {results.map((scheme, i) => (
+                <div key={scheme.id} className="p-6 border border-gray-100 rounded-xl bg-gray-50 hover:shadow-md transition-shadow flow-enter-child" style={{ '--child-i': i + 2 }}>
                   <span className="text-sm font-bold text-primary bg-indigo-50 px-3 py-1 rounded-full mb-3 inline-block">{scheme.category}</span>
                   <h3 className="text-xl font-bold mb-2">{scheme.name}</h3>
                   <p className="text-textSecondary mb-4 text-sm">{scheme.benefit}</p>
@@ -132,7 +131,7 @@ const EligibilityFlow = ({ onBack }) => {
             </div>
           </div>
 
-          <div className="text-center mt-10">
+          <div className="text-center mt-10 flow-enter-child" style={{ '--child-i': results.length + 2 }}>
             <button onClick={onBack} className="bg-textPrimary text-white px-8 py-3 rounded-xl font-semibold hover:bg-black transition-colors">
               Return Home
             </button>
@@ -144,8 +143,9 @@ const EligibilityFlow = ({ onBack }) => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center py-10 px-4 z-50 relative">
-      <div className="w-full max-w-2xl">
-        <div className="flex items-center justify-between mb-8">
+      {/* key forces React to fully unmount/remount this div when tile changes, guaranteeing CSS animations re-trigger */}
+      <div key={`tile-${currentTile}`} className="w-full max-w-2xl flow-enter">
+        <div className="flex items-center justify-between mb-8 flow-enter-child" style={{ '--child-i': 0 }}>
           <button 
             onClick={() => {
               if (currentTile > 1) setCurrentTile(currentTile - 1);
@@ -160,17 +160,18 @@ const EligibilityFlow = ({ onBack }) => {
           </div>
         </div>
 
-        <div className="bg-white p-6 md:p-10 rounded-3xl shadow-lg border border-gray-100">
+        <div className="bg-white p-6 md:p-10 rounded-3xl shadow-lg border border-gray-100 flow-enter-child" style={{ '--child-i': 1 }}>
           <div className="mb-8 w-full bg-gray-100 h-2 rounded-full overflow-hidden">
             <div className="bg-primary h-full transition-all duration-300" style={{ width: `${(currentTile / 9) * 100}%` }}></div>
           </div>
 
           <div className="space-y-10">
             {visibleQuestions.map((q, idx) => {
-              const isActive = idx === visibleQuestions.length - 1; // Highlight the active interactive question
+              const isActive = idx === visibleQuestions.length - 1;
               return (
-                <div key={q.id} className={`transition-opacity duration-300 ${!isActive ? 'opacity-60' : 'opacity-100'}`}>
-                  <h3 className="text-xl md:text-2xl font-bold text-textPrimary mb-6">{q.text}</h3>
+                <div key={q.id} className="flow-enter-child" style={{ '--child-i': idx + 2 }}>
+                  <div className={`transition-opacity duration-300 ${!isActive ? 'opacity-50' : 'opacity-100'}`}>
+                    <h3 className="text-xl md:text-2xl font-bold text-textPrimary mb-6">{q.text}</h3>
                   
                   {q.type === 'dropdown' ? (
                     <select 
@@ -227,12 +228,13 @@ const EligibilityFlow = ({ onBack }) => {
                       })}
                     </div>
                   )}
+                  </div>
                 </div>
               );
             })}
           </div>
 
-          <div className="mt-12 flex justify-end">
+          <div className="mt-12 flex justify-end flow-enter-child" style={{ '--child-i': visibleQuestions.length + 2 }}>
             <button 
               disabled={!canProceed}
               onClick={proceedNext}

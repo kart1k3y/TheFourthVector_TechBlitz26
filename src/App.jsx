@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -19,7 +19,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   const [view, setView] = useState('landing');
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const container = useRef(null);
+  const curtainRef = useRef(null);
   const iconsContainerRef = useRef(null);
   const globalIconsRef = useRef([]);
 
@@ -265,46 +267,89 @@ function App() {
 
   }, { scope: container });
 
-  if (view === 'eligibility') {
-    return <EligibilityFlow onBack={() => setView('landing')} />;
-  }
+  // Curtain wipe transition
+  const transitionTo = useCallback((targetView) => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+
+    const curtain = curtainRef.current;
+    const tl = gsap.timeline();
+
+    // Phase 1: Curtain sweeps up from bottom to cover the screen
+    tl.set(curtain, { display: 'block', yPercent: 100 })
+      .to(curtain, {
+        yPercent: 0,
+        duration: 0.6,
+        ease: 'power3.inOut',
+      })
+      // At the midpoint, swap the actual view
+      .call(() => {
+        setView(targetView);
+        window.scrollTo(0, 0);
+      })
+      // Small hold while the content mounts
+      .to({}, { duration: 0.15 })
+      // Phase 2: Curtain slides away upward, revealing new content
+      .to(curtain, {
+        yPercent: -100,
+        duration: 0.6,
+        ease: 'power3.inOut',
+      })
+      .call(() => {
+        setIsTransitioning(false);
+        gsap.set(curtain, { display: 'none' });
+      });
+  }, [isTransitioning]);
 
   return (
-    <main ref={container} className="relative w-full overflow-x-hidden bg-white">
+    <>
+      {view === 'eligibility' ? (
+        <EligibilityFlow onBack={() => transitionTo('landing')} />
+      ) : (
+        <main ref={container} className="relative w-full overflow-x-hidden bg-white">
 
-      {/* GLOBAL ICONS — absolute, stretches across full page height */}
-      <div ref={iconsContainerRef} className="absolute top-0 left-0 w-full z-40 pointer-events-none" style={{ height: '500vh' }}>
-        {iconData.map((data, i) => (
-          <div
-            key={i}
-            ref={el => globalIconsRef.current[i] = el}
-            className={`absolute neumorphic-circle opacity-80 ${data.wrapperClass}`}
-            style={{
-              top: data.initTop,
-              left: data.initLeft,
-            }}
-          >
-            <img
-              src={data.src}
-              alt={data.alt}
-              className={`object-contain ${data.imgClass}`}
-            />
+          {/* GLOBAL ICONS — absolute, stretches across full page height */}
+          <div ref={iconsContainerRef} className="absolute top-0 left-0 w-full z-40 pointer-events-none" style={{ height: '500vh' }}>
+            {iconData.map((data, i) => (
+              <div
+                key={i}
+                ref={el => globalIconsRef.current[i] = el}
+                className={`absolute neumorphic-circle opacity-80 ${data.wrapperClass}`}
+                style={{
+                  top: data.initTop,
+                  left: data.initLeft,
+                }}
+              >
+                <img
+                  src={data.src}
+                  alt={data.alt}
+                  className={`object-contain ${data.imgClass}`}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
 
-      <SectionIntro />
-      <div className="section-confusion-trigger">
-        <SectionConfusion />
-      </div>
-      <div className="section-question-trigger">
-        <SectionQuestion />
-      </div>
-      <div className="section-cta-trigger">
-        <SectionCTA onStart={() => setView('eligibility')} />
-      </div>
-    </main>
+          <SectionIntro />
+          <div className="section-confusion-trigger">
+            <SectionConfusion />
+          </div>
+          <div className="section-question-trigger">
+            <SectionQuestion />
+          </div>
+          <div className="section-cta-trigger">
+            <SectionCTA onStart={() => transitionTo('eligibility')} />
+          </div>
+        </main>
+      )}
+
+      {/* Curtain overlay — always mounted so GSAP can animate it across view changes */}
+      <div
+        ref={curtainRef}
+        className="page-curtain"
+      />
+    </>
   );
 }
 
 export default App;
+
