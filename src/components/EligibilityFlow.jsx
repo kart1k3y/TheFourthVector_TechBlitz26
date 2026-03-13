@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { FaArrowLeft, FaCheckCircle, FaChevronRight } from 'react-icons/fa';
+import { FaArrowLeft, FaCheckCircle, FaChevronRight, FaInfoCircle } from 'react-icons/fa';
 import questionsData from '../data/questions.json';
 import schemesData from '../data/schemes.json';
 import { useTranslation } from 'react-i18next';
@@ -275,7 +275,18 @@ const EligibilityFlow = ({ onBack }) => {
               const isActive = idx === visibleQuestions.length - 1;
               return (
                 <div key={q.id} className={`transition-opacity duration-300 ${!isActive ? 'opacity-60' : 'opacity-100'}`}>
-                  <h3 className="text-xl md:text-2xl font-bold text-textPrimary mb-6">{t(q.question_title)}</h3>
+                  <div className="flex items-center gap-2 mb-6 relative z-10">
+                    <h3 className="text-xl md:text-2xl font-bold text-textPrimary">{t(q.question_title)}</h3>
+                    {q.field === 'bpl' && (
+                      <div className="group relative flex items-center justify-center cursor-help">
+                        <FaInfoCircle className="text-gray-400 hover:text-primary transition-colors text-lg" />
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 bg-gray-900 text-white text-xs text-center p-2 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 shadow-xl pointer-events-none z-50">
+                          Below poverty line
+                          <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900"></div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
 
                   {q.type === 'dropdown' ? (
                     <select
