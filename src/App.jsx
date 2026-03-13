@@ -2,12 +2,14 @@ import React, { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { useTranslation } from 'react-i18next';
 
 import SectionIntro from './components/SectionIntro';
 import SectionConfusion from './components/SectionConfusion';
 import SectionQuestion from './components/SectionQuestion';
 import SectionCTA from './components/SectionCTA';
 import EligibilityFlow from './components/EligibilityFlow';
+import LanguageSwitcher from './components/LanguageSwitcher';
 
 import agriIcon from './assets/agri-icon.svg';
 import banknoteIcon from './assets/banknote.svg';
@@ -18,17 +20,18 @@ import womanIcon from './assets/woman-icon.svg';
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
+  const { t } = useTranslation();
   const [view, setView] = useState('landing');
   const container = useRef(null);
   const iconsContainerRef = useRef(null);
   const globalIconsRef = useRef([]);
 
   const iconData = [
-    { src: banknoteIcon, alt: "Finance", wrapperClass: "w-20 h-20 md:w-32 md:h-32 shadow-md md:shadow-xl", imgClass: "w-10 h-10 md:w-16 md:h-16", initTop: '20vh', initLeft: '10%' },
-    { src: educationIcon, alt: "Education", wrapperClass: "w-20 h-20 md:w-32 md:h-32 shadow-md md:shadow-xl", imgClass: "w-10 h-10 md:w-16 md:h-16", initTop: '22vh', initLeft: '72%' },
-    { src: agriIcon, alt: "Agriculture", wrapperClass: "w-20 h-20 md:w-32 md:h-32 shadow-md md:shadow-xl", imgClass: "w-10 h-10 md:w-16 md:h-16", initTop: '72vh', initLeft: '15%' },
-    { src: healthIcon, alt: "Health", wrapperClass: "w-20 h-20 md:w-32 md:h-32 shadow-md md:shadow-xl", imgClass: "w-10 h-10 md:w-16 md:h-16", initTop: '70vh', initLeft: '74%' },
-    { src: womanIcon, alt: "Women", wrapperClass: "w-20 h-20 md:w-32 md:h-32 shadow-md md:shadow-xl", imgClass: "w-10 h-10 md:w-16 md:h-16", initTop: '48vh', initLeft: '5%' },
+    { src: banknoteIcon, alt: t('icons.finance'), wrapperClass: "w-20 h-20 md:w-32 md:h-32 shadow-md md:shadow-xl", imgClass: "w-10 h-10 md:w-16 md:h-16", initTop: '20vh', initLeft: '10%' },
+    { src: educationIcon, alt: t('icons.education'), wrapperClass: "w-20 h-20 md:w-32 md:h-32 shadow-md md:shadow-xl", imgClass: "w-10 h-10 md:w-16 md:h-16", initTop: '22vh', initLeft: '72%' },
+    { src: agriIcon, alt: t('icons.agriculture'), wrapperClass: "w-20 h-20 md:w-32 md:h-32 shadow-md md:shadow-xl", imgClass: "w-10 h-10 md:w-16 md:h-16", initTop: '72vh', initLeft: '15%' },
+    { src: healthIcon, alt: t('icons.health'), wrapperClass: "w-20 h-20 md:w-32 md:h-32 shadow-md md:shadow-xl", imgClass: "w-10 h-10 md:w-16 md:h-16", initTop: '70vh', initLeft: '74%' },
+    { src: womanIcon, alt: t('icons.women'), wrapperClass: "w-20 h-20 md:w-32 md:h-32 shadow-md md:shadow-xl", imgClass: "w-10 h-10 md:w-16 md:h-16", initTop: '48vh', initLeft: '5%' },
   ];
 
   useGSAP(() => {
@@ -271,6 +274,7 @@ function App() {
 
   return (
     <main ref={container} className="relative w-full overflow-x-hidden bg-white">
+      <LanguageSwitcher />
 
       {/* GLOBAL ICONS — absolute, stretches across full page height */}
       <div ref={iconsContainerRef} className="absolute top-0 left-0 w-full z-40 pointer-events-none" style={{ height: '500vh' }}>

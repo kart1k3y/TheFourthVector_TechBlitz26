@@ -1,8 +1,10 @@
 import React, { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { useTranslation } from 'react-i18next';
 
 const SectionCTA = ({ onStart }) => {
+  const { t } = useTranslation();
   const sectionRef = useRef(null);
   const textRef = useRef(null);
   const buttonRef = useRef(null);
@@ -50,7 +52,7 @@ const SectionCTA = ({ onStart }) => {
         
         <div className="text-center w-full max-w-[320px] md:max-w-4xl lg:max-w-5xl">
           <h2 ref={textRef} className="text-3xl md:text-6xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-primary-gradient leading-tight pb-2 md:pb-6">
-            Discover schemes you are eligible for on LokSahay — in seconds.
+            {t('cta.title')}
           </h2>
         </div>
         
@@ -62,11 +64,11 @@ const SectionCTA = ({ onStart }) => {
             onMouseLeave={handleMouseLeave}
             className="w-full bg-primary text-white rounded-xl py-4 md:py-6 px-6 md:px-12 text-[16px] md:text-2xl font-semibold shadow-[0_8px_20px_-6px_rgba(91,63,140,0.6)] hover:shadow-[0_12px_24px_-8px_rgba(91,63,140,0.8)] transition-shadow"
           >
-            Check Eligibility
+            {t('cta.button')}
           </button>
           
           <p ref={subtextRef} className="text-sm md:text-lg lg:text-xl text-center text-textSecondary font-medium leading-relaxed">
-            Answer a few quick questions and get personalized scheme recommendations.
+            {t('cta.subtext')}
           </p>
         </div>
 

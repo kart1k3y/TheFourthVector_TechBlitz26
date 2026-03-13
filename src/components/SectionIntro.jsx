@@ -1,8 +1,10 @@
 import React, { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { useTranslation } from 'react-i18next';
 
 const SectionIntro = () => {
+  const { t } = useTranslation();
   const sectionRef = useRef(null);
   const textRef = useRef(null);
 
@@ -19,7 +21,7 @@ const SectionIntro = () => {
       
       <div className="z-10 text-center max-w-[320px] md:max-w-3xl lg:max-w-4xl">
         <h1 ref={textRef} className="text-2xl md:text-5xl lg:text-6xl font-bold text-textPrimary leading-tight">
-          India has hundreds of government schemes designed to support its citizens.
+          {t('intro.title')}
         </h1>
       </div>
     </section>

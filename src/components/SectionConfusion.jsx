@@ -1,10 +1,12 @@
 import React, { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { useTranslation } from 'react-i18next';
 
 import confusedIllustration from '../assets/confused-illustration.svg';
 
 const SectionConfusion = () => {
+  const { t } = useTranslation();
   const sectionRef = useRef(null);
   const textRef = useRef(null);
   const illustrationRef = useRef(null);
@@ -49,14 +51,14 @@ const SectionConfusion = () => {
            <img 
             ref={illustrationRef}
             src={confusedIllustration} 
-            alt="Confused Person" 
+            alt={t('confusion.alt')} 
             className="w-full h-full object-contain"
           />
         </div>
         
         <div className="text-center max-w-[280px] md:max-w-2xl pt-24 mt-8">
           <h2 ref={textRef} className="text-xl md:text-4xl lg:text-5xl font-semibold text-textPrimary leading-snug">
-            But finding the right one often feels confusing.
+            {t('confusion.title')}
           </h2>
         </div>
       </div>

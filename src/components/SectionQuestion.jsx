@@ -1,10 +1,12 @@
 import React, { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { useTranslation } from 'react-i18next';
 
 import searchIllustration from '../assets/search-illustation.svg';
 
 const SectionQuestion = () => {
+  const { t } = useTranslation();
   const sectionRef = useRef(null);
   const textRef = useRef(null);
   const illustrationRef = useRef(null);
@@ -37,14 +39,14 @@ const SectionQuestion = () => {
            <img 
             ref={illustrationRef}
             src={searchIllustration} 
-            alt="Searching Person" 
+            alt={t('question.alt')} 
             className="w-full h-full object-contain"
           />
         </div>
         
         <div className="text-center max-w-[300px] md:max-w-3xl">
           <h2 ref={textRef} className="text-xl md:text-4xl lg:text-5xl font-bold text-primary leading-snug">
-            Do you know which schemes you are actually eligible for?
+            {t('question.title')}
           </h2>
         </div>
       </div>
