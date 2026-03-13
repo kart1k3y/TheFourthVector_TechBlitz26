@@ -38,4 +38,11 @@
   .section-container {
     @apply relative w-full h-[100vh] flex flex-col items-center justify-center px-6;
   }
+  
+  .neumorphic-circle {
+    @apply rounded-full flex items-center justify-center bg-white;
+    box-shadow: 
+      6px 6px 12px #d1d5db, 
+      -6px -6px 12px #ffffff;
+  }
 }

@@ -22,11 +22,11 @@ function App() {
   const globalIconsRef = useRef([]);
 
   const iconData = [
-    { src: banknoteIcon, alt: "Finance", className: "w-16", initTop: '20vh', initLeft: '10%' },
-    { src: educationIcon, alt: "Education", className: "w-20", initTop: '22vh', initLeft: '72%' },
-    { src: agriIcon, alt: "Agriculture", className: "w-24", initTop: '72vh', initLeft: '15%' },
-    { src: healthIcon, alt: "Health", className: "w-16", initTop: '70vh', initLeft: '74%' },
-    { src: womanIcon, alt: "Women", className: "w-16", initTop: '48vh', initLeft: '5%' },
+    { src: banknoteIcon, alt: "Finance", wrapperClass: "w-20 h-20", imgClass: "w-10 h-10", initTop: '20vh', initLeft: '10%' },
+    { src: educationIcon, alt: "Education", wrapperClass: "w-20 h-20", imgClass: "w-10 h-10", initTop: '22vh', initLeft: '72%' },
+    { src: agriIcon, alt: "Agriculture", wrapperClass: "w-20 h-20", imgClass: "w-10 h-10", initTop: '72vh', initLeft: '15%' },
+    { src: healthIcon, alt: "Health", wrapperClass: "w-20 h-20", imgClass: "w-10 h-10", initTop: '70vh', initLeft: '74%' },
+    { src: womanIcon, alt: "Women", wrapperClass: "w-20 h-20", imgClass: "w-10 h-10", initTop: '48vh', initLeft: '5%' },
   ];
 
   useGSAP(() => {
@@ -262,17 +262,21 @@ function App() {
       {/* GLOBAL ICONS — absolute, stretches across full page height */}
       <div ref={iconsContainerRef} className="absolute top-0 left-0 w-full z-40 pointer-events-none" style={{ height: '500vh' }}>
         {iconData.map((data, i) => (
-          <img
+          <div
             key={i}
             ref={el => globalIconsRef.current[i] = el}
-            src={data.src}
-            alt={data.alt}
-            className={`absolute object-contain opacity-80 ${data.className}`}
+            className={`absolute neumorphic-circle opacity-80 ${data.wrapperClass}`}
             style={{
               top: data.initTop,
               left: data.initLeft,
             }}
-          />
+          >
+            <img
+              src={data.src}
+              alt={data.alt}
+              className={`object-contain ${data.imgClass}`}
+            />
+          </div>
         ))}
       </div>
 
