@@ -23,25 +23,36 @@ const EligibilityFlow = ({ onBack }) => {
       const q = questionsData.questions[currentId];
       if (!q) break;
 
-      if (q.tile === currentTile) {
+      // Special dynamic skips based on previous answers to make it "intelligent"
+      let skipQuestion = false;
+
+      if (currentId === 'Q12' || currentId === 'Q13') {
+        // If household size is 1, they don't have children or girl children to ask about
+        if (answers['Q11'] === '1') {
+          skipQuestion = true;
+          // Dynamically route past this node directly to Q14
+          currentId = q.next || 'Q14';
+          continue; // Skip processing this question and move to the next iteration
+        }
+      }
+
+      if (q.tile === currentTile && !skipQuestion) {
         visible.push({ id: currentId, ...q });
       } else if (q.tile > currentTile) {
         nextFirstNode = currentId;
         proceed = true;
         break;
-      } else if (q.tile < currentTile) {
-        // We should skip this question and find the next one
       }
 
       const answer = answers[currentId];
-      if (!answer) {
+      if (!answer && !skipQuestion) {
         proceed = false;
         break;
       }
 
       let nextNode = q.next; // Default next (if generic)
       // If it has options with specific next routing
-      if (q.options && !q.type) {
+      if (q.type === 'single_select' && q.options && !skipQuestion) {
         const option = q.options.find(opt => opt.value === answer);
         if (option && option.next) {
           nextNode = option.next;
@@ -60,18 +71,18 @@ const EligibilityFlow = ({ onBack }) => {
   const handleAnswer = (qId, value, type) => {
     setAnswers(prev => {
       const newAnswers = { ...prev };
-      
+
       if (type === 'multi_select') {
         let currentArr = newAnswers[qId] || [];
         if (value === 'none') {
-            currentArr = ['none'];
+          currentArr = ['none'];
         } else {
-            currentArr = currentArr.filter(v => v !== 'none');
-            if (currentArr.includes(value)) {
-                currentArr = currentArr.filter(v => v !== value);
-            } else {
-                currentArr.push(value);
-            }
+          currentArr = currentArr.filter(v => v !== 'none');
+          if (currentArr.includes(value)) {
+            currentArr = currentArr.filter(v => v !== value);
+          } else {
+            currentArr.push(value);
+          }
         }
         newAnswers[qId] = currentArr;
         if (currentArr.length === 0) delete newAnswers[qId];
@@ -84,14 +95,81 @@ const EligibilityFlow = ({ onBack }) => {
 
   const calculateResults = () => {
     return schemesData.schemes.filter(scheme => {
-      return true;
+      // If the scheme has specific eligibility criteria
+      if (scheme.eligibility) {
+        let matchCount = 0;
+        let failCount = 0;
+        let totalAnswered = 0;
+
+        // Loop through all criteria keys (e.g., 'income', 'bpl', 'age_group')
+        for (const [key, value] of Object.entries(scheme.eligibility)) {
+          // If the key exists in our answers map
+          // Some keys might map slightly differently, e.g., documents is a multi_select
+
+          if (key === 'documents') {
+            // value is an array of REQUIRED documents, e.g. ["aadhaar", "ration_card"]
+            const docAnswer = answers['Q23']; // Q23 is documents in questions.json
+            if (docAnswer !== undefined) {
+              totalAnswered++;
+              const userDocs = docAnswer || [];
+              const hasAllRequired = value.every(reqDoc => userDocs.includes(reqDoc));
+              if (hasAllRequired) {
+                matchCount++;
+              } else {
+                failCount++;
+              }
+            }
+            continue;
+          }
+
+          // Let's find if the user answered the question matching this field
+          const questionId = Object.keys(questionsData.questions).find(
+            qId => questionsData.questions[qId].field === key
+          );
+
+          if (questionId) {
+            const userAnswer = answers[questionId];
+
+            if (userAnswer !== undefined && userAnswer !== null && userAnswer !== '') {
+              totalAnswered++;
+              // If the required criteria is an array of allowed values
+              if (Array.isArray(value)) {
+                if (value.includes(userAnswer)) {
+                  matchCount++;
+                } else {
+                  failCount++;
+                }
+              } else {
+                // Exact string match
+                if (userAnswer === value) {
+                  matchCount++;
+                } else {
+                  failCount++;
+                }
+              }
+            }
+          }
+        }
+
+        // The scheme should be considered eligible if the majority of eligibility conditions match the user answers.
+        // If no criteria were answered, we'll consider it eligible (or you could change this to require at least 1 match)
+        if (totalAnswered > 0) {
+          return matchCount >= failCount;
+        }
+
+        return true;
+      }
+
+      return true; // Default to true if no specific eligibility block
     });
   };
 
   const proceedNext = () => {
     const lastAnswered = visibleQuestions[visibleQuestions.length - 1];
     let nextNode = lastAnswered.next;
-    if (lastAnswered.options && !lastAnswered.type) {
+
+    // For single_select it may have specific routing on the selected option
+    if (lastAnswered.type === 'single_select' && lastAnswered.options) {
       const option = lastAnswered.options.find(opt => opt.value === answers[lastAnswered.id]);
       if (option && option.next) nextNode = option.next;
     }
@@ -111,7 +189,7 @@ const EligibilityFlow = ({ onBack }) => {
           <button onClick={() => setIsFinished(false)} className="text-primary flex items-center mb-6 hover:underline font-semibold flow-enter-child" style={{ '--child-i': 0 }}>
             <FaArrowLeft className="mr-2" /> Back to questions
           </button>
-          
+
           <div className="bg-white p-6 md:p-10 rounded-2xl shadow-xl border border-gray-100 mb-8 flow-enter-child" style={{ '--child-i': 1 }}>
             <div className="flex items-center space-x-4 mb-6">
               <FaCheckCircle className="text-4xl text-green-500" />
@@ -146,11 +224,11 @@ const EligibilityFlow = ({ onBack }) => {
       {/* key forces React to fully unmount/remount this div when tile changes, guaranteeing CSS animations re-trigger */}
       <div key={`tile-${currentTile}`} className="w-full max-w-2xl flow-enter">
         <div className="flex items-center justify-between mb-8 flow-enter-child" style={{ '--child-i': 0 }}>
-          <button 
+          <button
             onClick={() => {
               if (currentTile > 1) setCurrentTile(currentTile - 1);
               else onBack();
-            }} 
+            }}
             className="text-textSecondary hover:text-textPrimary flex items-center font-medium transition-colors"
           >
             <FaArrowLeft className="mr-2" /> Back
@@ -172,62 +250,70 @@ const EligibilityFlow = ({ onBack }) => {
                 <div key={q.id} className="flow-enter-child" style={{ '--child-i': idx + 2 }}>
                   <div className={`transition-opacity duration-300 ${!isActive ? 'opacity-50' : 'opacity-100'}`}>
                     <h3 className="text-xl md:text-2xl font-bold text-textPrimary mb-6">{q.text}</h3>
-                  
-                  {q.type === 'dropdown' ? (
-                    <select 
-                      className="w-full border-2 border-gray-200 rounded-xl p-4 text-lg focus:border-primary focus:ring-0 outline-none transition-colors"
-                      value={answers[q.id] || ''}
-                      onChange={(e) => handleAnswer(q.id, e.target.value, 'dropdown')}
-                    >
-                      <option value="" disabled>Select an option</option>
-                      <option value="state_1">Option 1</option>
-                      <option value="state_2">Option 2</option>
-                      <option value="state_3">Option 3</option>
-                    </select>
-                  ) : q.type === 'multi_select' ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {q.options.map(opt => {
-                        const isSelected = (answers[q.id] || []).includes(opt.value || opt);
-                        return (
-                          <button
-                            key={opt.value || opt}
-                            onClick={() => handleAnswer(q.id, opt.value || opt, 'multi_select')}
-                            className={`p-4 border-2 rounded-xl text-left font-semibold transition-all ${
-                              isSelected 
-                                ? 'border-primary bg-indigo-50 text-primary' 
-                                : 'border-gray-200 hover:border-indigo-200 hover:bg-gray-50 text-textSecondary'
-                            }`}
-                          >
-                            <div className="flex items-center justify-between">
-                              <span>{opt.label || opt}</span>
-                              <div className={`w-5 h-5 rounded flex items-center justify-center border ${isSelected ? 'border-primary bg-primary' : 'border-gray-300'}`}>
-                                {isSelected && <FaCheckCircle className="text-white text-xs" />}
+
+                    {q.type === 'dropdown' ? (
+                      <select
+                        className="w-full border-2 border-gray-200 rounded-xl p-4 text-lg focus:border-primary focus:ring-0 outline-none transition-colors"
+                        value={answers[q.id] || ''}
+                        onChange={(e) => handleAnswer(q.id, e.target.value, 'dropdown')}
+                      >
+                        <option value="" disabled>Select an option</option>
+                        {q.options.map(opt => (
+                          <option key={opt.value || opt} value={opt.value || opt}>
+                            {opt.label || opt}
+                          </option>
+                        ))}
+                      </select>
+                    ) : q.type === 'text' ? (
+                      <input
+                        type="text"
+                        className="w-full border-2 border-gray-200 rounded-xl p-4 text-lg focus:border-primary focus:ring-0 outline-none transition-colors"
+                        placeholder="Enter your answer"
+                        value={answers[q.id] || ''}
+                        onChange={(e) => handleAnswer(q.id, e.target.value, 'text')}
+                      />
+                    ) : q.type === 'multi_select' ? (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {q.options.map(opt => {
+                          const isSelected = (answers[q.id] || []).includes(opt.value || opt);
+                          return (
+                            <button
+                              key={opt.value || opt}
+                              onClick={() => handleAnswer(q.id, opt.value || opt, 'multi_select')}
+                              className={`p-4 border-2 rounded-xl text-left font-semibold transition-all ${isSelected
+                                  ? 'border-primary bg-indigo-50 text-primary'
+                                  : 'border-gray-200 hover:border-indigo-200 hover:bg-gray-50 text-textSecondary'
+                                }`}
+                            >
+                              <div className="flex items-center justify-between">
+                                <span>{opt.label || opt}</span>
+                                <div className={`w-5 h-5 rounded flex items-center justify-center border ${isSelected ? 'border-primary bg-primary' : 'border-gray-300'}`}>
+                                  {isSelected && <FaCheckCircle className="text-white text-xs" />}
+                                </div>
                               </div>
-                            </div>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {q.options.map(opt => {
-                        const isSelected = answers[q.id] === opt.value;
-                        return (
-                          <button
-                            key={opt.value}
-                            onClick={() => handleAnswer(q.id, opt.value, 'single')}
-                            className={`p-4 border-2 rounded-xl text-left font-semibold transition-all ${
-                              isSelected 
-                                ? 'border-primary bg-indigo-50 text-primary scale-[1.02]' 
-                                : 'border-gray-200 hover:border-indigo-200 hover:bg-gray-50 text-textSecondary'
-                            }`}
-                          >
-                            {opt.label}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  )}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {q.options.map(opt => {
+                          const isSelected = answers[q.id] === opt.value;
+                          return (
+                            <button
+                              key={opt.value}
+                              onClick={() => handleAnswer(q.id, opt.value, 'single')}
+                              className={`p-4 border-2 rounded-xl text-left font-semibold transition-all ${isSelected
+                                  ? 'border-primary bg-indigo-50 text-primary scale-[1.02]'
+                                  : 'border-gray-200 hover:border-indigo-200 hover:bg-gray-50 text-textSecondary'
+                                }`}
+                            >
+                              {opt.label}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
                 </div>
               );
@@ -235,14 +321,13 @@ const EligibilityFlow = ({ onBack }) => {
           </div>
 
           <div className="mt-12 flex justify-end flow-enter-child" style={{ '--child-i': visibleQuestions.length + 2 }}>
-            <button 
+            <button
               disabled={!canProceed}
               onClick={proceedNext}
-              className={`flex items-center px-8 py-4 rounded-xl font-bold text-lg transition-all ${
-                canProceed 
-                  ? 'bg-primary text-white hover:shadow-lg hover:-translate-y-1' 
+              className={`flex items-center px-8 py-4 rounded-xl font-bold text-lg transition-all ${canProceed
+                  ? 'bg-primary text-white hover:shadow-lg hover:-translate-y-1'
                   : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-              }`}
+                }`}
             >
               Next <FaChevronRight className="ml-2" />
             </button>
