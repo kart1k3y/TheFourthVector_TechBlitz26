@@ -3,15 +3,11 @@ import { FaArrowLeft, FaCheckCircle, FaChevronRight, FaInfoCircle } from 'react-
 import questionsData from '../data/questions.json';
 import schemesData from '../data/schemes.json';
 import { useTranslation } from 'react-i18next';
-import SchemeDetailModal from './SchemeDetailModal';
-
-const EligibilityFlow = ({ onBack }) => {
+const EligibilityFlow = ({ onBack, onSchemeSelect }) => {
   const { t } = useTranslation();
   const [answers, setAnswers] = useState({});
   const [currentTile, setCurrentTile] = useState(1);
   const [isFinished, setIsFinished] = useState(false);
-  const [selectedScheme, setSelectedScheme] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -232,10 +228,7 @@ const EligibilityFlow = ({ onBack }) => {
               {results.map((scheme, i) => (
                 <div 
                   key={scheme.id} 
-                  onClick={() => {
-                    setSelectedScheme(scheme);
-                    setIsModalOpen(true);
-                  }}
+                  onClick={() => onSchemeSelect(scheme)}
                   className="p-6 border border-gray-100 rounded-xl bg-gray-50 hover:shadow-md transition-all cursor-pointer hover:border-primary/30 group flow-enter-child" 
                   style={{ '--child-i': i + 2 }}
                 >
@@ -249,12 +242,6 @@ const EligibilityFlow = ({ onBack }) => {
               ))}
             </div>
           </div>
-
-          <SchemeDetailModal 
-            scheme={selectedScheme}
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-          />
 
           <div className="text-center mt-10 flow-enter-child" style={{ '--child-i': results.length + 2 }}>
             <button onClick={onBack} className="bg-textPrimary text-white px-8 py-3 rounded-xl font-semibold hover:bg-black transition-colors">

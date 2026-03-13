@@ -12,10 +12,13 @@ import SectionFAQ from './components/SectionFAQ';
 import EligibilityFlow from './components/EligibilityFlow';
 import CategorySchemes from './components/CategorySchemes';
 import LandingFlow from './components/LandingFlow';
+import SchemeDetailView from './components/SchemeDetailView';
 
 function App() {
   const [view, setView] = useState('landing');
+  const [previousView, setPreviousView] = useState('landing');
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedScheme, setSelectedScheme] = useState(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const curtainRef = useRef(null);
 
@@ -27,21 +30,21 @@ function App() {
     const curtain = curtainRef.current;
     const tl = gsap.timeline();
 
-    // Phase 1: Curtain sweeps up from bottom to cover the screen
     tl.set(curtain, { display: 'block', yPercent: 100 })
       .to(curtain, {
         yPercent: 0,
         duration: 0.6,
         ease: 'power3.inOut',
       })
-      // At the midpoint, swap the actual view
       .call(() => {
+        // Track the previous view only if we are going to schemeDetail
+        if (targetView === 'schemeDetail') {
+          setPreviousView(view);
+        }
         setView(targetView);
         window.scrollTo(0, 0);
       })
-      // Small hold while the content mounts
       .to({}, { duration: 0.15 })
-      // Phase 2: Curtain slides away upward, revealing new content
       .to(curtain, {
         yPercent: -100,
         duration: 0.6,
@@ -51,7 +54,7 @@ function App() {
         setIsTransitioning(false);
         gsap.set(curtain, { display: 'none' });
       });
-  }, [isTransitioning]);
+  }, [isTransitioning, view]);
 
   // Handle icon click → navigate to category page
   const handleIconClick = useCallback((category) => {
@@ -59,16 +62,30 @@ function App() {
     transitionTo('category');
   }, [transitionTo]);
 
+  // Handle scheme click → navigate to detail page
+  const handleSchemeClick = useCallback((scheme) => {
+    setSelectedScheme(scheme);
+    transitionTo('schemeDetail');
+  }, [transitionTo]);
+
   return (
     <>
       {view === 'eligibility' ? (
-        <EligibilityFlow onBack={() => transitionTo('landing')} />
+        <EligibilityFlow 
+          onBack={() => transitionTo('landing')} 
+          onSchemeSelect={handleSchemeClick}
+        />
       ) : view === 'category' ? (
         <CategorySchemes
           category={selectedCategory}
-          // Simple icon mapping since we moved iconData to LandingFlow
-          icon={null} // Default icon or pass it if needed, but the category page looks fine without it
+          icon={null}
           onBack={() => transitionTo('landing')}
+          onSchemeSelect={handleSchemeClick}
+        />
+      ) : view === 'schemeDetail' ? (
+        <SchemeDetailView
+          scheme={selectedScheme}
+          onBack={() => transitionTo(previousView)}
         />
       ) : (
         <LandingFlow 
@@ -77,7 +94,7 @@ function App() {
         />
       )}
 
-      {/* Curtain overlay — always mounted so GSAP can animate it across view changes */}
+      {/* Curtain overlay */}
       <div
         ref={curtainRef}
         className="page-curtain"

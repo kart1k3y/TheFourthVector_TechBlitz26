@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { FaArrowLeft, FaChevronRight } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import schemesData from '../data/schemes.json';
-import SchemeDetailModal from './SchemeDetailModal';
 
 // Map icon categories to scheme categories (English values as they appear in en/translation.json)
 const CATEGORY_MAP = {
@@ -21,10 +20,8 @@ const CATEGORY_COLORS = {
   Women: { bg: 'bg-purple-50', badge: 'bg-purple-100 text-purple-700', border: 'border-purple-200' },
 };
 
-const CategorySchemes = ({ category, icon, onBack }) => {
+const CategorySchemes = ({ category, icon, onBack, onSchemeSelect }) => {
   const { t, i18n } = useTranslation();
-  const [selectedScheme, setSelectedScheme] = React.useState(null);
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -78,10 +75,7 @@ const CategorySchemes = ({ category, icon, onBack }) => {
             {schemes.map((scheme, i) => (
               <div
                 key={scheme.id}
-                onClick={() => {
-                  setSelectedScheme(scheme);
-                  setIsModalOpen(true);
-                }}
+                onClick={() => onSchemeSelect(scheme)}
                 className={`flow-enter-child bg-white p-5 md:p-7 rounded-2xl shadow-sm border ${colors.border} hover:shadow-md transition-all hover:-translate-y-0.5 cursor-pointer group flex flex-col`}
                 style={{ '--child-i': i + 2 }}
               >
@@ -106,11 +100,6 @@ const CategorySchemes = ({ category, icon, onBack }) => {
             ))}
           </div>
 
-          <SchemeDetailModal 
-            scheme={selectedScheme}
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-          />
 
           {schemes.length === 0 && (
             <div className="flow-enter-child text-center py-20" style={{ '--child-i': 2 }}>
