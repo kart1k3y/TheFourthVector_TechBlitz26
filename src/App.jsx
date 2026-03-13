@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -7,6 +7,7 @@ import SectionIntro from './components/SectionIntro';
 import SectionConfusion from './components/SectionConfusion';
 import SectionQuestion from './components/SectionQuestion';
 import SectionCTA from './components/SectionCTA';
+import EligibilityFlow from './components/EligibilityFlow';
 
 import agriIcon from './assets/agri-icon.svg';
 import banknoteIcon from './assets/banknote.svg';
@@ -17,6 +18,7 @@ import womanIcon from './assets/woman-icon.svg';
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
+  const [view, setView] = useState('landing');
   const container = useRef(null);
   const iconsContainerRef = useRef(null);
   const globalIconsRef = useRef([]);
@@ -263,6 +265,10 @@ function App() {
 
   }, { scope: container });
 
+  if (view === 'eligibility') {
+    return <EligibilityFlow onBack={() => setView('landing')} />;
+  }
+
   return (
     <main ref={container} className="relative w-full overflow-x-hidden bg-white">
 
@@ -295,7 +301,7 @@ function App() {
         <SectionQuestion />
       </div>
       <div className="section-cta-trigger">
-        <SectionCTA />
+        <SectionCTA onStart={() => setView('eligibility')} />
       </div>
     </main>
   );

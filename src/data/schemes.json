@@ -1,0 +1,226 @@
+{
+  "schemes": [
+    {
+      "id": "ayushman_bharat",
+      "name": "Ayushman Bharat – PM Jan Arogya Yojana",
+      "category": "Health",
+      "benefit": "Up to ₹5 lakh health insurance per family per year",
+      "eligibility": {
+        "income": ["below_1L", "1_3L"],
+        "bpl": "yes",
+        "age": "any"
+      },
+      "documents_required": ["aadhaar", "ration_card"],
+      "notes": "Eligibility mainly based on SECC 2011 deprivation categories and low-income households",
+      "source": "Government health insurance program for low-income families"
+    },
+
+    {
+      "id": "jan_aushadhi",
+      "name": "Pradhan Mantri Jan Aushadhi Yojana",
+      "category": "Health",
+      "benefit": "Affordable generic medicines through Jan Aushadhi stores",
+      "eligibility": {
+        "age": "any",
+        "citizen": "india"
+      },
+      "documents_required": [],
+      "notes": "Open to all citizens purchasing medicines from government generic pharmacies"
+    },
+
+    {
+      "id": "jan_dhan",
+      "name": "Pradhan Mantri Jan Dhan Yojana",
+      "category": "Financial Inclusion",
+      "benefit": "Zero balance bank account with insurance and overdraft facility",
+      "eligibility": {
+        "age_min": 10,
+        "citizen": "india"
+      },
+      "documents_required": ["aadhaar", "voter_id", "pan_card"],
+      "notes": "Designed for unbanked citizens to access financial services"
+    },
+
+    {
+      "id": "pmjjby",
+      "name": "Pradhan Mantri Jeevan Jyoti Bima Yojana",
+      "category": "Financial Inclusion",
+      "benefit": "Life insurance cover of ₹2 lakh",
+      "eligibility": {
+        "age_min": 18,
+        "age_max": 50,
+        "bank_account": true
+      },
+      "documents_required": ["aadhaar", "bank_account"],
+      "notes": "Annual renewable life insurance scheme"
+    },
+
+    {
+      "id": "pmsby",
+      "name": "Pradhan Mantri Suraksha Bima Yojana",
+      "category": "Financial Inclusion",
+      "benefit": "Accidental insurance cover up to ₹2 lakh",
+      "eligibility": {
+        "age_min": 18,
+        "age_max": 70,
+        "bank_account": true
+      },
+      "documents_required": ["aadhaar", "bank_account"],
+      "notes": "Accidental death and disability insurance scheme"
+    },
+
+    {
+      "id": "pmay_urban",
+      "name": "Pradhan Mantri Awas Yojana (Urban)",
+      "category": "Housing",
+      "benefit": "Subsidized housing for urban low-income households",
+      "eligibility": {
+        "location": "urban",
+        "income": ["below_1L", "1_3L", "3_6L"],
+        "house_owner": "no"
+      },
+      "documents_required": ["aadhaar", "income_certificate"],
+      "notes": "Applicant should not own a pucca house"
+    },
+
+    {
+      "id": "pmay_rural",
+      "name": "Pradhan Mantri Awas Yojana (Rural)",
+      "category": "Housing",
+      "benefit": "Financial assistance for rural housing construction",
+      "eligibility": {
+        "location": "rural",
+        "house_owner": "no"
+      },
+      "documents_required": ["aadhaar", "ration_card"],
+      "notes": "Beneficiaries identified through SECC rural housing deprivation data"
+    },
+
+    {
+      "id": "pm_kisan",
+      "name": "PM Kisan Samman Nidhi",
+      "category": "Agriculture",
+      "benefit": "₹6000 per year income support to farmers",
+      "eligibility": {
+        "occupation": "farmer",
+        "land_owner": true
+      },
+      "documents_required": ["aadhaar", "bank_account", "land_records"],
+      "notes": "Only landholding farmers are eligible"
+    },
+
+    {
+      "id": "pm_fasal_bima",
+      "name": "Pradhan Mantri Fasal Bima Yojana",
+      "category": "Agriculture",
+      "benefit": "Crop insurance for farmers",
+      "eligibility": {
+        "occupation": "farmer",
+        "crop_cultivation": true
+      },
+      "documents_required": ["aadhaar", "bank_account", "land_records"],
+      "notes": "Available to loanee and non-loanee farmers"
+    },
+
+    {
+      "id": "pm_krishi_sinchai",
+      "name": "Pradhan Mantri Krishi Sinchai Yojana",
+      "category": "Agriculture",
+      "benefit": "Irrigation support for farmers",
+      "eligibility": {
+        "occupation": "farmer",
+        "land_owner": true
+      },
+      "documents_required": ["aadhaar", "land_records"]
+    },
+
+    {
+      "id": "sukanya",
+      "name": "Sukanya Samriddhi Yojana",
+      "category": "Women & Child Welfare",
+      "benefit": "Savings scheme for girl child",
+      "eligibility": {
+        "girl_child": true,
+        "child_age_max": 10
+      },
+      "documents_required": ["birth_certificate", "aadhaar"]
+    },
+
+    {
+      "id": "beti_bachao",
+      "name": "Beti Bachao Beti Padhao",
+      "category": "Women & Child Welfare",
+      "benefit": "Support programs for girl child education",
+      "eligibility": {
+        "girl_child": true
+      }
+    },
+
+    {
+      "id": "ujjwala",
+      "name": "PM Ujjwala Yojana",
+      "category": "Women & Child Welfare",
+      "benefit": "Free LPG connection for poor households",
+      "eligibility": {
+        "gender": "female",
+        "bpl": "yes"
+      },
+      "documents_required": ["aadhaar", "ration_card"]
+    },
+
+    {
+      "id": "pmkvy",
+      "name": "Pradhan Mantri Kaushal Vikas Yojana",
+      "category": "Employment / Skill",
+      "benefit": "Free skill training programs",
+      "eligibility": {
+        "age_min": 18
+      }
+    },
+
+    {
+      "id": "mudra",
+      "name": "Pradhan Mantri Mudra Yojana",
+      "category": "Business / Startup",
+      "benefit": "Loans up to ₹10 lakh for small businesses",
+      "eligibility": {
+        "occupation": ["self_employed", "business_owner"]
+      },
+      "documents_required": ["aadhaar", "business_documents"]
+    },
+
+    {
+      "id": "standup_india",
+      "name": "Stand Up India Scheme",
+      "category": "Business / Startup",
+      "benefit": "Loans for SC/ST or women entrepreneurs",
+      "eligibility": {
+        "category": ["sc", "st"],
+        "gender": "female",
+        "business_owner": true
+      }
+    },
+
+    {
+      "id": "startup_india",
+      "name": "Startup India",
+      "category": "Business / Startup",
+      "benefit": "Support for startup companies",
+      "eligibility": {
+        "business_owner": true
+      }
+    },
+
+    {
+      "id": "atal_pension",
+      "name": "Atal Pension Yojana",
+      "category": "Pension / Social Security",
+      "benefit": "Guaranteed pension after age 60",
+      "eligibility": {
+        "age_min": 18,
+        "age_max": 40,
+        "bank_account": true
+      }
+    }
+  ]
+}

@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
-const SectionCTA = () => {
+const SectionCTA = ({ onStart }) => {
   const sectionRef = useRef(null);
   const textRef = useRef(null);
   const buttonRef = useRef(null);
@@ -57,6 +57,7 @@ const SectionCTA = () => {
         <div className="flex flex-col items-center space-y-4 md:space-y-6 w-full max-w-[280px] md:max-w-md lg:max-w-lg">
           <button 
             ref={buttonRef}
+            onClick={onStart}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             className="w-full bg-primary text-white rounded-xl py-4 md:py-6 px-6 md:px-12 text-[16px] md:text-2xl font-semibold shadow-[0_8px_20px_-6px_rgba(91,63,140,0.6)] hover:shadow-[0_12px_24px_-8px_rgba(91,63,140,0.8)] transition-shadow"
