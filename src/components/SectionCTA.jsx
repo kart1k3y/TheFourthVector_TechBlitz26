@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { FaChevronDown } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 
 const SectionCTA = ({ onStart }) => {
@@ -47,7 +48,7 @@ const SectionCTA = ({ onStart }) => {
   };
 
   return (
-    <section ref={sectionRef} className="section-container bg-cardBg z-40 relative">
+    <section ref={sectionRef} className="section-container bg-cardBg z-30 relative">
       <div className="z-10 flex flex-col items-center justify-center space-y-10 px-4 w-full">
         
         <div className="text-center w-full max-w-[320px] md:max-w-4xl lg:max-w-5xl">
@@ -72,6 +73,12 @@ const SectionCTA = ({ onStart }) => {
           </p>
         </div>
 
+      </div>
+
+      {/* Scroll indicator for FAQs below */}
+      <div className="absolute bottom-8 inset-x-0 mx-auto w-fit flex flex-col items-center gap-2 animate-bounce">
+        <span className="text-base md:text-lg font-semibold text-textSecondary tracking-wider">FAQs</span>
+        <FaChevronDown className="text-textSecondary text-xl" />
       </div>
     </section>
   );
