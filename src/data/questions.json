@@ -2,255 +2,212 @@
   "start_question": "Q1",
   "questions": {
     "Q1": {
+      "id": "Q1",
+      "field": "age_group",
       "text": "What is your age group?",
       "tile": 1,
+      "type": "single_select",
       "options": [
-        { "value": "under18", "label": "Under 18", "next": "Q2" },
-        { "value": "18_25", "label": "18–25", "next": "Q2" },
-        { "value": "26_40", "label": "26–40", "next": "Q2" },
-        { "value": "41_60", "label": "41–60", "next": "Q2" },
-        { "value": "60_plus", "label": "Above 60", "next": "Q2" }
+        {"value": "under18", "label": "Under 18", "next": "Q2"},
+        {"value": "18_25", "label": "18–25", "next": "Q2"},
+        {"value": "26_40", "label": "26–40", "next": "Q2"},
+        {"value": "41_60", "label": "41–60", "next": "Q2"},
+        {"value": "60_plus", "label": "Above 60", "next": "Q2"}
       ]
     },
 
     "Q2": {
+      "id": "Q2",
+      "field": "gender",
       "text": "What is your gender?",
       "tile": 1,
+      "type": "single_select",
       "options": [
-        { "value": "male", "label": "Male", "next": "Q3" },
-        { "value": "female", "label": "Female", "next": "Q3" },
-        { "value": "transgender", "label": "Transgender", "next": "Q3" },
-        { "value": "na", "label": "Prefer not to say", "next": "Q3" }
+        {"value": "male", "label": "Male", "next": "Q3"},
+        {"value": "female", "label": "Female", "next": "Q3"},
+        {"value": "transgender", "label": "Transgender", "next": "Q3"},
+        {"value": "na", "label": "Prefer not to say", "next": "Q3"}
       ]
     },
 
     "Q3": {
-      "text": "Which state do you live in?",
+      "id": "Q3",
+      "field": "state",
+      "text": "Which state or union territory do you live in?",
       "tile": 1,
       "type": "dropdown",
+      "options": [
+        "Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh",
+        "Goa","Gujarat","Haryana","Himachal Pradesh","Jharkhand",
+        "Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur",
+        "Meghalaya","Mizoram","Nagaland","Odisha","Punjab",
+        "Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura",
+        "Uttar Pradesh","Uttarakhand","West Bengal",
+        "Delhi","Jammu and Kashmir","Ladakh","Chandigarh","Puducherry"
+      ],
       "next": "Q4"
     },
 
     "Q4": {
+      "id": "Q4",
+      "field": "district",
       "text": "Which district do you live in?",
       "tile": 1,
-      "type": "dropdown",
+      "type": "text",
       "next": "Q5"
     },
 
     "Q5": {
+      "id": "Q5",
+      "field": "residence",
       "text": "Do you live in",
       "tile": 2,
+      "type": "single_select",
       "options": [
-        { "value": "rural", "label": "Rural (Village)", "next": "Q6" },
-        { "value": "urban", "label": "Urban (City)", "next": "Q6" }
+        {"value": "rural", "label": "Rural (Village)", "next": "Q6"},
+        {"value": "urban", "label": "Urban (City)", "next": "Q6"}
       ]
     },
 
     "Q6": {
+      "id": "Q6",
+      "field": "occupation",
       "text": "What best describes your occupation?",
       "tile": 2,
+      "type": "single_select",
       "options": [
-        { "value": "student", "label": "Student", "next": "Q7" },
-        { "value": "farmer", "label": "Farmer", "next": "Q7" },
-        { "value": "self_employed", "label": "Self-employed", "next": "Q7" },
-        { "value": "business_owner", "label": "Business owner", "next": "Q7" },
-        { "value": "private_employee", "label": "Private employee", "next": "Q7" },
-        { "value": "government_employee", "label": "Government employee", "next": "Q7" },
-        { "value": "homemaker", "label": "Homemaker", "next": "Q7" },
-        { "value": "unemployed", "label": "Unemployed", "next": "Q7" },
-        { "value": "senior_citizen", "label": "Senior citizen", "next": "Q7" }
+        {"value": "student", "label": "Student", "next": "Q7"},
+        {"value": "farmer", "label": "Farmer", "next": "Q7"},
+        {"value": "self_employed", "label": "Self-employed", "next": "Q7"},
+        {"value": "business_owner", "label": "Business owner", "next": "Q7"},
+        {"value": "private_employee", "label": "Private employee", "next": "Q7"},
+        {"value": "government_employee", "label": "Government employee", "next": "Q7"},
+        {"value": "homemaker", "label": "Homemaker", "next": "Q7"},
+        {"value": "unemployed", "label": "Unemployed", "next": "Q7"},
+        {"value": "senior_citizen", "label": "Senior citizen", "next": "Q7"}
       ]
     },
 
     "Q7": {
+      "id": "Q7",
+      "field": "studying",
       "text": "Are you currently studying?",
       "tile": 2,
+      "type": "single_select",
       "options": [
-        { "value": "yes", "label": "Yes", "next": "Q8" },
-        { "value": "no", "label": "No", "next": "Q8" }
+        {"value": "yes", "label": "Yes", "next": "Q8"},
+        {"value": "no", "label": "No", "next": "Q8"}
       ]
     },
 
     "Q8": {
+      "id": "Q8",
+      "field": "income",
       "text": "What is your annual household income?",
       "tile": 3,
+      "type": "single_select",
       "options": [
-        { "value": "below_1L", "label": "Below ₹1 lakh", "next": "Q9" },
-        { "value": "1_3L", "label": "₹1–3 lakh", "next": "Q9" },
-        { "value": "3_6L", "label": "₹3–6 lakh", "next": "Q9" },
-        { "value": "6_10L", "label": "₹6–10 lakh", "next": "Q9" },
-        { "value": "above_10L", "label": "Above ₹10 lakh", "next": "Q9" }
+        {"value": "below_1L", "label": "Below ₹1 lakh", "next": "Q9"},
+        {"value": "1_3L", "label": "₹1–3 lakh", "next": "Q9"},
+        {"value": "3_6L", "label": "₹3–6 lakh", "next": "Q9"},
+        {"value": "6_10L", "label": "₹6–10 lakh", "next": "Q9"},
+        {"value": "above_10L", "label": "Above ₹10 lakh", "next": "Q9"}
       ]
     },
 
     "Q9": {
+      "id": "Q9",
+      "field": "bpl",
       "text": "Do you belong to the BPL category?",
       "tile": 3,
+      "type": "single_select",
       "options": [
-        { "value": "yes", "label": "Yes", "next": "Q10" },
-        { "value": "no", "label": "No", "next": "Q10" },
-        { "value": "not_sure", "label": "Not sure", "next": "Q10" }
+        {"value": "yes", "label": "Yes", "next": "Q10"},
+        {"value": "no", "label": "No", "next": "Q10"},
+        {"value": "not_sure", "label": "Not sure", "next": "Q10"}
       ]
     },
 
     "Q10": {
+      "id": "Q10",
+      "field": "ration_card",
       "text": "Do you have a ration card?",
       "tile": 3,
+      "type": "single_select",
       "options": [
-        { "value": "yes", "label": "Yes", "next": "Q11" },
-        { "value": "no", "label": "No", "next": "Q11" },
-        { "value": "not_sure", "label": "Not sure", "next": "Q11" }
+        {"value": "yes", "label": "Yes", "next": "Q11"},
+        {"value": "no", "label": "No", "next": "Q11"},
+        {"value": "not_sure", "label": "Not sure", "next": "Q11"}
       ]
     },
 
     "Q11": {
+      "id": "Q11",
+      "field": "household_size",
       "text": "How many people are in your household?",
       "tile": 4,
+      "type": "single_select",
       "options": [
-        { "value": "1", "label": "1", "next": "Q12" },
-        { "value": "2_4", "label": "2–4", "next": "Q12" },
-        { "value": "5_7", "label": "5–7", "next": "Q12" },
-        { "value": "7_plus", "label": "More than 7", "next": "Q12" }
+        {"value": "1", "label": "1", "next": "Q14"},
+        {"value": "2_4", "label": "2–4", "next": "Q12"},
+        {"value": "5_7", "label": "5–7", "next": "Q12"},
+        {"value": "7_plus", "label": "More than 7", "next": "Q12"}
       ]
     },
 
     "Q12": {
+      "id": "Q12",
+      "field": "children_under10",
       "text": "Do you have children below 10 years?",
       "tile": 4,
+      "type": "single_select",
       "options": [
-        { "value": "yes", "label": "Yes", "next": "Q13" },
-        { "value": "no", "label": "No", "next": "Q13" }
+        {"value": "yes", "label": "Yes", "next": "Q13"},
+        {"value": "no", "label": "No", "next": "Q14"}
       ]
     },
 
     "Q13": {
+      "id": "Q13",
+      "field": "girl_child",
       "text": "Do you have a girl child below 10 years?",
       "tile": 4,
+      "type": "single_select",
       "options": [
-        { "value": "yes", "label": "Yes", "next": "Q14" },
-        { "value": "no", "label": "No", "next": "Q14" }
+        {"value": "yes", "label": "Yes", "next": "Q14"},
+        {"value": "no", "label": "No", "next": "Q14"}
       ]
     },
 
     "Q14": {
+      "id": "Q14",
+      "field": "education",
       "text": "What is your highest education completed?",
       "tile": 5,
+      "type": "single_select",
       "options": [
-        { "value": "below10", "label": "Below 10th", "next": "Q15" },
-        { "value": "10th", "label": "10th pass", "next": "Q15" },
-        { "value": "12th", "label": "12th pass", "next": "Q15" },
-        { "value": "diploma", "label": "Diploma", "next": "Q15" },
-        { "value": "graduate", "label": "Graduate", "next": "Q15" },
-        { "value": "postgraduate", "label": "Postgraduate", "next": "Q15" }
+        {"value": "below10", "label": "Below 10th", "next": "Q15"},
+        {"value": "10th", "label": "10th pass", "next": "Q15"},
+        {"value": "12th", "label": "12th pass", "next": "Q15"},
+        {"value": "diploma", "label": "Diploma", "next": "Q15"},
+        {"value": "graduate", "label": "Graduate", "next": "Q15"},
+        {"value": "postgraduate", "label": "Postgraduate", "next": "Q15"}
       ]
     },
 
     "Q15": {
-      "text": "Are you interested in",
-      "tile": 5,
-      "options": [
-        { "value": "skill_training", "label": "Skill training", "next": "Q16" },
-        { "value": "higher_education", "label": "Higher education", "next": "Q16" },
-        { "value": "business", "label": "Starting a business", "next": "Q16" },
-        { "value": "jobs", "label": "Job opportunities", "next": "Q16" }
-      ]
-    },
-
-    "Q16": {
-      "text": "Do you belong to any of these categories?",
-      "tile": 6,
-      "options": [
-        { "value": "general", "label": "General", "next": "Q17" },
-        { "value": "obc", "label": "OBC", "next": "Q17" },
-        { "value": "sc", "label": "SC", "next": "Q17" },
-        { "value": "st", "label": "ST", "next": "Q17" }
-      ]
-    },
-
-    "Q17": {
-      "text": "Are you part of a minority community?",
-      "tile": 6,
-      "options": [
-        { "value": "yes", "label": "Yes", "next": "Q18" },
-        { "value": "no", "label": "No", "next": "Q18" }
-      ]
-    },
-
-    "Q18": {
-      "text": "Do you own agricultural land?",
-      "tile": 7,
-      "options": [
-        { "value": "yes", "label": "Yes", "next": "Q19" },
-        { "value": "no", "label": "No", "next": "Q19" }
-      ]
-    },
-
-    "Q19": {
-      "text": "Do you own a house?",
-      "tile": 7,
-      "options": [
-        { "value": "pucca", "label": "Yes (Pucca house)", "next": "Q20" },
-        { "value": "kutcha", "label": "Yes (Kutcha house)", "next": "Q20" },
-        { "value": "no", "label": "No house", "next": "Q20" }
-      ]
-    },
-
-    "Q20": {
-      "text": "Do you own a registered business?",
-      "tile": 7,
-      "options": [
-        { "value": "yes", "label": "Yes", "next": "Q21" },
-        { "value": "no", "label": "No", "next": "Q21" }
-      ]
-    },
-
-    "Q21": {
-      "text": "Do any of these apply to you?",
-      "tile": 8,
-      "type": "multi_select",
-      "options": [
-        { "value": "person_with_disability", "label": "Person with Disability" },
-        { "value": "widow", "label": "Widow" },
-        { "value": "pregnant", "label": "Pregnant" },
-        { "value": "senior_citizen", "label": "Senior Citizen" },
-        { "value": "none", "label": "None of the above" }
-      ],
-      "next": "Q22"
-    },
-
-    "Q22": {
-      "text": "Are you a farmer or involved in agriculture?",
-      "tile": 8,
-      "options": [
-        { "value": "yes", "label": "Yes", "next": "Q23" },
-        { "value": "no", "label": "No", "next": "Q23" }
-      ]
-    },
-
-    "Q23": {
-      "text": "Which documents do you have?",
-      "tile": 9,
-      "type": "multi_select",
-      "options": [
-        { "value": "aadhaar", "label": "Aadhaar Card" },
-        { "value": "bank_account", "label": "Bank Account" },
-        { "value": "pan_card", "label": "PAN Card" },
-        { "value": "ration_card", "label": "Ration Card" }
-      ],
-      "next": "Q24"
-    },
-
-    "Q24": {
+      "id": "Q15",
+      "field": "interest",
       "text": "What type of support are you looking for?",
-      "tile": 9,
+      "tile": 5,
+      "type": "single_select",
       "options": [
-        { "value": "healthcare", "label": "Healthcare", "next": "RESULTS" },
-        { "value": "housing", "label": "Housing", "next": "RESULTS" },
-        { "value": "farming", "label": "Farming support", "next": "RESULTS" },
-        { "value": "education", "label": "Education", "next": "RESULTS" },
-        { "value": "business", "label": "Starting a business", "next": "RESULTS" },
-        { "value": "financial", "label": "Financial assistance", "next": "RESULTS" }
+        {"value": "healthcare", "label": "Healthcare", "next": "RESULTS"},
+        {"value": "housing", "label": "Housing", "next": "RESULTS"},
+        {"value": "farming", "label": "Farming support", "next": "RESULTS"},
+        {"value": "education", "label": "Education", "next": "RESULTS"},
+        {"value": "business", "label": "Starting a business", "next": "RESULTS"},
+        {"value": "financial", "label": "Financial assistance", "next": "RESULTS"}
       ]
     }
   }
