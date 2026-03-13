@@ -47,14 +47,13 @@ function App() {
     }
 
     function getInitPos(i) {
-      const mainWidth = mainEl.offsetWidth;
       return {
         y: parseFloat(iconData[i].initTop) / 100 * window.innerHeight,
-        x: parseFloat(iconData[i].initLeft) / 100 * mainWidth,
+        x: parseFloat(iconData[i].initLeft) / 100 * mainEl.offsetWidth,
       };
     }
 
-    // HORIZONTAL C-shape: icons spread left to right with a curved (smile) shape
+    // Upward Arch shape: icons wrap elegantly above the central illustration
     function getSection3CPositions() {
       const scrollY = window.scrollY || window.pageYOffset;
       const section3 = document.querySelector('.section-question-trigger');
@@ -62,22 +61,27 @@ function App() {
       const sec3Top = scrollY + rect3.top;
       const containerW = mainEl.offsetWidth;
 
-      // Horizontal arc: spread icons across 80% of width,
-      // with a downward curve (like a smile / horizontal C)
-      const arcRadius = 80;
-      const startX = containerW * 0.1;  // 10% from left edge
-      const endX = containerW * 0.9;    // 90% from left edge
-      const centerY = sec3Top + rect3.height * 0.25; // Upper portion of section
-      const positions = [];
-      for (let i = 0; i < numIcons; i++) {
-        const t = i / (numIcons - 1);  // 0 to 1
-        // Angle from π to 0 (left to right along bottom of circle = smile shape)
+      const arcRadius = 140; // Wider curve wrapping the illustration
+      const startX = containerW * 0.12;  
+      const endX = containerW * 0.88;    
+      // Raise the arc higher so it envelopes the top of the illustration
+      const centerY = sec3Top + (rect3.height * 0.40);
+
+      const positions = new Array(numIcons);
+      
+      // Clean mapping so icons don't criss-cross during transition! 
+      // At the end of Phase 2 orbit, they are roughly in this X-axis order:
+      const order = [1, 0, 2, 4, 3]; 
+
+      for (let j = 0; j < numIcons; j++) {
+        const iconIndex = order[j];
+        const t = j / (numIcons - 1);  // 0 to 1
         const angle = Math.PI * (1 - t);
-        // Math.sin(angle) is positive (0 to 1 back to 0). Subtracting it moves the Y coordinate UP on screen.
-        positions.push({
+        
+        positions[iconIndex] = {
           x: startX + t * (endX - startX),
-          y: centerY - Math.sin(angle) * arcRadius,  // Negative offset creates upward arch curve
-        });
+          y: centerY - Math.sin(angle) * arcRadius,
+        };
       }
       return positions;
     }
@@ -141,6 +145,7 @@ function App() {
         pin: true,
         scrub: 1,
         anticipatePin: 1,
+        refreshPriority: 10,   // MUST refresh first to offset child triggers correctly!
       },
       onUpdate: () => {
         const center = getOrbitCenter();
@@ -197,16 +202,18 @@ function App() {
       }
     });
 
-    // ─── PHASE 4: EXIT FROM SECTION 3 (Merge to bottom center) ───
+    // ─── PHASE 4: EXIT & PIN SECTION 3 ───
     const exitState = { progress: 0 };
     gsap.to(exitState, {
       progress: 1,
       ease: "power2.inOut",
       scrollTrigger: {
         trigger: ".section-question-trigger",
-        start: "center center", // Start when Section 3 is fully in view
-        end: "bottom center",   // End as Section 3 leaves the screen
+        start: "top top",       // Start exactly when Section 3 hits top
+        end: "+=120%",          // Pin the section for 120% of viewport height
+        pin: true,              // <--- THIS SCROLL-LOCKS THE WHITE SECTION
         scrub: 1.5,
+        anticipatePin: 1,
       },
       onUpdate: () => {
         const p = exitState.progress;
@@ -217,21 +224,32 @@ function App() {
         const section3 = document.querySelector('.section-question-trigger');
         const rect3 = section3.getBoundingClientRect();
         
-        // Target: bottom center of Section 3
+        const section4 = document.querySelector('.section-cta-trigger');
+        const rect4 = section4.getBoundingClientRect();
+        
+        // Target: Center of Section 4 (the actual text area)
         const targetX = mainEl.offsetWidth / 2;
-        // rect3.bottom is viewport-relative. scrollY + rect3.bottom is document-absolute.
-        // We want the merge point to be near the bottom of Section 3.
-        const targetY = scrollY + rect3.bottom - 50; 
+        // Pushing the target deeper into Section 4 to match the text height/center
+        const targetY = scrollY + rect4.top + (rect4.height * 0.45); 
 
+        // Update global floating icons
         icons.forEach((icon, i) => {
           gsap.set(icon, {
             top: cPositions[i].y + (targetY - cPositions[i].y) * p,
             left: cPositions[i].x + (targetX - cPositions[i].x) * p,
-            scale: (0.7 + 0.15) * (1 - p), // Shrink to 0
-            opacity: 0.8 * (1 - p),        // Fade to 0
+            scale: (0.7 + 0.15) * (1 - p), // Shrink to 0 at the very end
+            opacity: 0.8 * (1 - p),        // Fade to 0 at the very end
             xPercent: -50,
             yPercent: -50,
           });
+        });
+
+        // Synchronously fade out Section 3 text & illustration
+        // Let them travel deeply into Section 4's area before vanishing
+        gsap.set(['.section-question-trigger img', '.section-question-trigger h2'], {
+          opacity: 1 - Math.pow(p, 1.5), // Stay visible longer, curve fades out mostly at the end
+          y: p * 300,             // Sink deeply into Section 4
+          scale: 1 - (p * 0.9)    // Shrink significantly to look like it's being sucked into the center
         });
       }
     });
@@ -265,7 +283,9 @@ function App() {
       <div className="section-question-trigger">
         <SectionQuestion />
       </div>
-      <SectionCTA />
+      <div className="section-cta-trigger">
+        <SectionCTA />
+      </div>
     </main>
   );
 }

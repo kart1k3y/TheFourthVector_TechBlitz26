@@ -14,8 +14,7 @@ const SectionQuestion = () => {
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top 60%",
-        end: "center center",
-        scrub: 1,
+        toggleActions: "play none none reverse"
       }
     });
 
@@ -28,30 +27,6 @@ const SectionQuestion = () => {
       { opacity: 1, scale: 1, duration: 1 },
       "<0.2"
     );
-
-    // --- EXIT ANIMATION ---
-    const exitTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "center center",
-        end: "bottom center",
-        scrub: 1,
-      }
-    });
-
-    // Move illustration and text towards bottom center and fade out
-    exitTl.to(illustrationRef.current, {
-      opacity: 0,
-      y: 150,
-      scale: 0.5,
-      duration: 1
-    }, 0)
-    .to(textRef.current, {
-      opacity: 0,
-      y: 100,
-      scale: 0.5,
-      duration: 1
-    }, 0);
 
   }, { scope: sectionRef });
 
