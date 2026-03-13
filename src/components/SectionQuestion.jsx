@@ -33,7 +33,7 @@ const SectionQuestion = () => {
   return (
     <section ref={sectionRef} className="section-container relative z-30 bg-white">
       <div className="z-10 flex flex-col items-center justify-center space-y-8">
-        <div className="w-56 h-56 relative">
+        <div className="w-56 h-56 md:w-80 md:h-80 lg:w-96 lg:h-96 relative">
            <img 
             ref={illustrationRef}
             src={searchIllustration} 
@@ -42,8 +42,8 @@ const SectionQuestion = () => {
           />
         </div>
         
-        <div className="text-center max-w-[300px]">
-          <h2 ref={textRef} className="text-xl md:text-2xl font-bold text-primary leading-snug">
+        <div className="text-center max-w-[300px] md:max-w-3xl">
+          <h2 ref={textRef} className="text-xl md:text-4xl lg:text-5xl font-bold text-primary leading-snug">
             Do you know which schemes you are actually eligible for?
           </h2>
         </div>

@@ -48,23 +48,23 @@ const SectionCTA = () => {
     <section ref={sectionRef} className="section-container bg-cardBg z-40 relative">
       <div className="z-10 flex flex-col items-center justify-center space-y-10 px-4 w-full">
         
-        <div className="text-center w-full max-w-[320px]">
-          <h2 ref={textRef} className="text-3xl font-extrabold text-transparent bg-clip-text bg-primary-gradient leading-tight pb-2">
+        <div className="text-center w-full max-w-[320px] md:max-w-4xl lg:max-w-5xl">
+          <h2 ref={textRef} className="text-3xl md:text-6xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-primary-gradient leading-tight pb-2 md:pb-6">
             Discover schemes you are eligible for on LokSahay — in seconds.
           </h2>
         </div>
         
-        <div className="flex flex-col items-center space-y-4 w-full max-w-[280px]">
+        <div className="flex flex-col items-center space-y-4 md:space-y-6 w-full max-w-[280px] md:max-w-md lg:max-w-lg">
           <button 
             ref={buttonRef}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className="w-full bg-primary text-white rounded-xl py-4 px-6 text-[16px] font-semibold shadow-[0_8px_20px_-6px_rgba(91,63,140,0.6)] hover:shadow-[0_12px_24px_-8px_rgba(91,63,140,0.8)] transition-shadow"
+            className="w-full bg-primary text-white rounded-xl py-4 md:py-6 px-6 md:px-12 text-[16px] md:text-2xl font-semibold shadow-[0_8px_20px_-6px_rgba(91,63,140,0.6)] hover:shadow-[0_12px_24px_-8px_rgba(91,63,140,0.8)] transition-shadow"
           >
             Check Eligibility
           </button>
           
-          <p ref={subtextRef} className="text-sm text-center text-textSecondary font-medium leading-relaxed">
+          <p ref={subtextRef} className="text-sm md:text-lg lg:text-xl text-center text-textSecondary font-medium leading-relaxed">
             Answer a few quick questions and get personalized scheme recommendations.
           </p>
         </div>

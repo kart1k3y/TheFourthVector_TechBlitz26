@@ -45,7 +45,7 @@ const SectionConfusion = () => {
     <section ref={sectionRef} className="section-container relative bg-cardBg z-20">
 
       <div className="z-10 flex flex-col items-center justify-center space-y-8">
-        <div className="w-48 h-48 relative">
+        <div className="w-48 h-48 md:w-80 md:h-80 lg:w-96 lg:h-96 relative">
            <img 
             ref={illustrationRef}
             src={confusedIllustration} 
@@ -54,8 +54,8 @@ const SectionConfusion = () => {
           />
         </div>
         
-        <div className="text-center max-w-[280px] pt-24 mt-8">
-          <h2 ref={textRef} className="text-xl md:text-2xl font-semibold text-textPrimary leading-snug">
+        <div className="text-center max-w-[280px] md:max-w-2xl pt-24 mt-8">
+          <h2 ref={textRef} className="text-xl md:text-4xl lg:text-5xl font-semibold text-textPrimary leading-snug">
             But finding the right one often feels confusing.
           </h2>
         </div>

@@ -17,8 +17,8 @@ const SectionIntro = () => {
   return (
     <section ref={sectionRef} className="section-container relative z-10 flex items-center justify-center">
       
-      <div className="z-10 text-center max-w-[320px]">
-        <h1 ref={textRef} className="text-2xl md:text-3xl font-bold text-textPrimary leading-tight">
+      <div className="z-10 text-center max-w-[320px] md:max-w-3xl lg:max-w-4xl">
+        <h1 ref={textRef} className="text-2xl md:text-5xl lg:text-6xl font-bold text-textPrimary leading-tight">
           India has hundreds of government schemes designed to support its citizens.
         </h1>
       </div>

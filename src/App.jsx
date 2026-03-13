@@ -22,11 +22,11 @@ function App() {
   const globalIconsRef = useRef([]);
 
   const iconData = [
-    { src: banknoteIcon, alt: "Finance", wrapperClass: "w-20 h-20", imgClass: "w-10 h-10", initTop: '20vh', initLeft: '10%' },
-    { src: educationIcon, alt: "Education", wrapperClass: "w-20 h-20", imgClass: "w-10 h-10", initTop: '22vh', initLeft: '72%' },
-    { src: agriIcon, alt: "Agriculture", wrapperClass: "w-20 h-20", imgClass: "w-10 h-10", initTop: '72vh', initLeft: '15%' },
-    { src: healthIcon, alt: "Health", wrapperClass: "w-20 h-20", imgClass: "w-10 h-10", initTop: '70vh', initLeft: '74%' },
-    { src: womanIcon, alt: "Women", wrapperClass: "w-20 h-20", imgClass: "w-10 h-10", initTop: '48vh', initLeft: '5%' },
+    { src: banknoteIcon, alt: "Finance", wrapperClass: "w-20 h-20 md:w-32 md:h-32 shadow-md md:shadow-xl", imgClass: "w-10 h-10 md:w-16 md:h-16", initTop: '20vh', initLeft: '10%' },
+    { src: educationIcon, alt: "Education", wrapperClass: "w-20 h-20 md:w-32 md:h-32 shadow-md md:shadow-xl", imgClass: "w-10 h-10 md:w-16 md:h-16", initTop: '22vh', initLeft: '72%' },
+    { src: agriIcon, alt: "Agriculture", wrapperClass: "w-20 h-20 md:w-32 md:h-32 shadow-md md:shadow-xl", imgClass: "w-10 h-10 md:w-16 md:h-16", initTop: '72vh', initLeft: '15%' },
+    { src: healthIcon, alt: "Health", wrapperClass: "w-20 h-20 md:w-32 md:h-32 shadow-md md:shadow-xl", imgClass: "w-10 h-10 md:w-16 md:h-16", initTop: '70vh', initLeft: '74%' },
+    { src: womanIcon, alt: "Women", wrapperClass: "w-20 h-20 md:w-32 md:h-32 shadow-md md:shadow-xl", imgClass: "w-10 h-10 md:w-16 md:h-16", initTop: '48vh', initLeft: '5%' },
   ];
 
   useGSAP(() => {
@@ -61,7 +61,8 @@ function App() {
       const sec3Top = scrollY + rect3.top;
       const containerW = mainEl.offsetWidth;
 
-      const arcRadius = 140; // Wider curve wrapping the illustration
+      // Make the arc responsive based on screen real estate
+      const arcRadius = Math.min(containerW * 0.35, 300); // Cap it at 300px so it's not absurdly tall on ultrawide monitors
       const startX = containerW * 0.12;  
       const endX = containerW * 0.88;    
       // Raise the arc higher so it envelopes the top of the illustration
@@ -117,8 +118,14 @@ function App() {
         const p = arrivalState.progress;
         icons.forEach((icon, i) => {
           const angle = (i / numIcons) * Math.PI * 2;
-          const targetX = center.x + Math.cos(angle) * orbitRadius;
-          const targetY = center.y + Math.sin(angle) * orbitRadius;
+          // ─── PHASE 2: ORBIT ───
+          // Dynamically size the orbit oval based on the screen width
+          const radiusX = Math.min(mainEl.offsetWidth * 0.35, 380);
+          const radiusY = Math.min(mainEl.offsetWidth * 0.20, 220);
+
+          // Calculate target position for the orbit (Phase 2)
+          const targetX = center.x + Math.cos(angle) * radiusX;
+          const targetY = center.y + Math.sin(angle) * radiusY;
           const init = getInitPos(i);
 
           gsap.set(icon, {
