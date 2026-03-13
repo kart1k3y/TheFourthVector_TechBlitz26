@@ -35,22 +35,137 @@
     "note": "Note"
   },
   "questions": {
-    "Q1": { "text": "What is your age group?", "options": { "under18": "Under 18", "18_25": "18–25", "26_40": "26–40", "41_60": "41–60", "60_plus": "Above 60" } },
-    "Q2": { "text": "What is your gender?", "options": { "male": "Male", "female": "Female", "transgender": "Transgender", "na": "Prefer not to say" } },
-    "Q3": { "text": "Which state or union territory do you live in?" },
-    "Q4": { "text": "Which district do you live in?" },
-    "Q5": { "text": "Do you live in", "options": { "rural": "Rural (Village)", "urban": "Urban (City)" } },
-    "Q6": { "text": "What best describes your occupation?", "options": { "student": "Student", "farmer": "Farmer", "self_employed": "Self-employed", "business_owner": "Business owner", "private_employee": "Private employee", "government_employee": "Government employee", "homemaker": "Homemaker", "unemployed": "Unemployed", "senior_citizen": "Senior citizen" } },
-    "Q7": { "text": "Are you currently studying?", "options": { "yes": "Yes", "no": "No" } },
-    "Q8": { "text": "What is your annual household income?", "options": { "below_1L": "Below ₹1 lakh", "1_3L": "₹1–3 lakh", "3_6L": "₹3–6 lakh", "6_10L": "₹6–10 lakh", "above_10L": "Above ₹10 lakh" } },
-    "Q9": { "text": "Do you belong to the BPL category?", "options": { "yes": "Yes", "no": "No", "not_sure": "Not sure" } },
-    "Q10": { "text": "Do you have a ration card?", "options": { "yes": "Yes", "no": "No", "not_sure": "Not sure" } },
-    "Q11": { "text": "How many people are in your household?", "options": { "1": "1", "2_4": "2–4", "5_7": "5–7", "7_plus": "More than 7" } },
-    "Q12": { "text": "Do you have children below 10 years?", "options": { "yes": "Yes", "no": "No" } },
-    "Q13": { "text": "Do you have a girl child below 10 years?", "options": { "yes": "Yes", "no": "No" } },
-    "Q14": { "text": "What is your highest education completed?", "options": { "below10": "Below 10th", "10th": "10th pass", "12th": "12th pass", "diploma": "Diploma", "graduate": "Graduate", "postgraduate": "Postgraduate" } },
-    "Q15": { "text": "What type of support are you looking for?", "options": { "healthcare": "Healthcare", "housing": "Housing", "farming": "Farming support", "education": "Education", "business": "Starting a business", "financial": "Financial assistance" } },
-    "Q16": { "text": "Do you have a bank account?", "options": { "yes": "Yes", "no": "No" } }
+    "Q1": {
+      "text": "What is your age group?",
+      "options": {
+        "under18": "Under 18",
+        "18_25": "18–25",
+        "26_40": "26–40",
+        "41_60": "41–60",
+        "60_plus": "Above 60"
+      }
+    },
+    "Q2": {
+      "text": "What is your gender?",
+      "options": {
+        "male": "Male",
+        "female": "Female",
+        "transgender": "Transgender",
+        "na": "Prefer not to say"
+      }
+    },
+    "Q3": {
+      "text": "Which state or union territory do you live in?"
+    },
+    "Q4": {
+      "text": "Which district do you live in?"
+    },
+    "Q5": {
+      "text": "Do you live in",
+      "options": {
+        "rural": "Rural (Village)",
+        "urban": "Urban (City)"
+      }
+    },
+    "Q6": {
+      "text": "What best describes your occupation?",
+      "options": {
+        "student": "Student",
+        "farmer": "Farmer",
+        "self_employed": "Self-employed",
+        "business_owner": "Business owner",
+        "private_employee": "Private employee",
+        "government_employee": "Government employee",
+        "homemaker": "Homemaker",
+        "unemployed": "Unemployed",
+        "senior_citizen": "Senior citizen"
+      }
+    },
+    "Q7": {
+      "text": "Are you currently studying?",
+      "options": {
+        "yes": "Yes",
+        "no": "No"
+      }
+    },
+    "Q8": {
+      "text": "What is your annual household income?",
+      "options": {
+        "below_1L": "Below ₹1 lakh",
+        "1_3L": "₹1–3 lakh",
+        "3_6L": "₹3–6 lakh",
+        "6_10L": "₹6–10 lakh",
+        "above_10L": "Above ₹10 lakh"
+      }
+    },
+    "Q9": {
+      "text": "Do you belong to the BPL category?",
+      "options": {
+        "yes": "Yes",
+        "no": "No",
+        "not_sure": "Not sure"
+      }
+    },
+    "Q10": {
+      "text": "Do you have a ration card?",
+      "options": {
+        "yes": "Yes",
+        "no": "No",
+        "not_sure": "Not sure"
+      }
+    },
+    "Q11": {
+      "text": "How many people are in your household?",
+      "options": {
+        "1": "1",
+        "2_4": "2–4",
+        "5_7": "5–7",
+        "7_plus": "More than 7"
+      }
+    },
+    "Q12": {
+      "text": "Do you have children below 10 years?",
+      "options": {
+        "yes": "Yes",
+        "no": "No"
+      }
+    },
+    "Q13": {
+      "text": "Do you have a girl child below 10 years?",
+      "options": {
+        "yes": "Yes",
+        "no": "No"
+      }
+    },
+    "Q14": {
+      "text": "What is your highest education completed?",
+      "options": {
+        "below10": "Below 10th",
+        "10th": "10th pass",
+        "12th": "12th pass",
+        "diploma": "Diploma",
+        "graduate": "Graduate",
+        "postgraduate": "Postgraduate"
+      }
+    },
+    "Q15": {
+      "text": "What type of support are you looking for?",
+      "options": {
+        "healthcare": "Healthcare",
+        "housing": "Housing",
+        "farming": "Farming support",
+        "education": "Education",
+        "business": "Starting a business",
+        "financial": "Financial assistance"
+      }
+    },
+    "Q16": {
+      "text": "Do you have a bank account?",
+      "options": {
+        "yes": "Yes",
+        "no": "No"
+      }
+    }
   },
   "states": {
     "andhra_pradesh": "Andhra Pradesh",
@@ -91,31 +206,282 @@
     "lakshadweep": "Lakshadweep"
   },
   "schemes": {
-    "ayushman_bharat": { "name": "Ayushman Bharat – PM Jan Arogya Yojana", "category": "Health", "benefit": "₹5 lakh health insurance per family per year" },
-    "jan_aushadhi": { "name": "Pradhan Mantri Jan Aushadhi Yojana", "category": "Health", "benefit": "Affordable generic medicines through Jan Aushadhi stores" },
-    "jan_dhan": { "name": "Pradhan Mantri Jan Dhan Yojana", "category": "Financial Inclusion", "benefit": "Zero balance bank account with insurance and overdraft" },
-    "pmjjby": { "name": "Pradhan Mantri Jeevan Jyoti Bima Yojana", "category": "Financial Inclusion", "benefit": "₹2 lakh life insurance cover" },
-    "pmsby": { "name": "Pradhan Mantri Suraksha Bima Yojana", "category": "Financial Inclusion", "benefit": "₹2 lakh accidental insurance" },
-    "pmay_urban": { "name": "Pradhan Mantri Awas Yojana (Urban)", "category": "Housing", "benefit": "Subsidized housing loans" },
-    "pmay_rural": { "name": "Pradhan Mantri Awas Yojana (Rural)", "category": "Housing", "benefit": "Financial assistance for rural housing" },
-    "pm_kisan": { "name": "PM Kisan Samman Nidhi", "category": "Agriculture", "benefit": "₹6000 per year support to farmers" },
-    "pm_fasal_bima": { "name": "Pradhan Mantri Fasal Bima Yojana", "category": "Agriculture", "benefit": "Crop insurance scheme for farmers" },
-    "pm_krishi_sinchai": { "name": "Pradhan Mantri Krishi Sinchai Yojana", "category": "Agriculture", "benefit": "Irrigation support for farmers" },
-    "sukanya": { "name": "Sukanya Samriddhi Yojana", "category": "Women & Child Welfare", "benefit": "Savings scheme for girl child" },
-    "beti_bachao": { "name": "Beti Bachao Beti Padhao", "category": "Women & Child Welfare", "benefit": "Girl child education and welfare program" },
-    "ujjwala": { "name": "PM Ujjwala Yojana", "category": "Women & Child Welfare", "benefit": "Free LPG connection for poor households" },
-    "poshan": { "name": "POSHAN Abhiyaan", "category": "Women & Child Welfare", "benefit": "Nutrition support for mothers and children" },
-    "pmkvy": { "name": "Pradhan Mantri Kaushal Vikas Yojana", "category": "Employment / Skill", "benefit": "Free skill development training" },
-    "ddugky": { "name": "Deen Dayal Upadhyaya Grameen Kaushalya Yojana", "category": "Employment / Skill", "benefit": "Skill training and job placement" },
-    "pmegp": { "name": "Prime Minister Employment Generation Programme", "category": "Employment / Skill", "benefit": "Subsidy for starting small enterprises" },
-    "mudra": { "name": "Pradhan Mantri Mudra Yojana", "category": "Business / Startup", "benefit": "Loans up to ₹10 lakh for small businesses" },
-    "standup_india": { "name": "Stand Up India Scheme", "category": "Business / Startup", "benefit": "Bank loans for SC/ST and women entrepreneurs" },
-    "startup_india": { "name": "Startup India", "category": "Business / Startup", "benefit": "Government support for startups" },
-    "atal_pension": { "name": "Atal Pension Yojana", "category": "Pension / Social Security", "benefit": "Guaranteed pension after age 60" },
-    "nsap": { "name": "National Social Assistance Programme", "category": "Pension / Social Security", "benefit": "Pension support for elderly and vulnerable groups" },
-    "jal_jeevan": { "name": "Jal Jeevan Mission", "category": "Infrastructure / Welfare", "benefit": "Household tap water connections" },
-    "swachh_bharat": { "name": "Swachh Bharat Mission", "category": "Infrastructure / Welfare", "benefit": "Toilet construction support" },
-    "digital_india": { "name": "Digital India Mission", "category": "Infrastructure / Welfare", "benefit": "Digital access and services for citizens" }
+    "ayushman_bharat": {
+      "name": "Ayushman Bharat – PM Jan Arogya Yojana",
+      "category": "Health",
+      "benefit": "₹5 lakh health insurance per family per year",
+      "steps": {
+        "0": "Visit the PMJAY website or nearest CSC center",
+        "1": "Check eligibility using Aadhaar or ration card",
+        "2": "Complete Aadhaar eKYC",
+        "3": "Verify family details",
+        "4": "Download or print Ayushman card"
+      }
+    },
+    "jan_aushadhi": {
+      "name": "Pradhan Mantri Jan Aushadhi Yojana",
+      "category": "Health",
+      "benefit": "Affordable generic medicines through Jan Aushadhi stores",
+      "steps": {
+        "0": "Visit Janaushadhi official website",
+        "1": "Download store application form",
+        "2": "Attach required pharmacy documents",
+        "3": "Submit application online or offline",
+        "4": "Wait for approval to open store"
+      }
+    },
+    "jan_dhan": {
+      "name": "Pradhan Mantri Jan Dhan Yojana",
+      "category": "Financial Inclusion",
+      "benefit": "Zero balance bank account with insurance and overdraft",
+      "steps": {
+        "0": "Visit nearest bank branch",
+        "1": "Ask for Jan Dhan account form",
+        "2": "Submit ID proof and photo",
+        "3": "Bank opens zero balance account"
+      }
+    },
+    "pmjjby": {
+      "name": "Pradhan Mantri Jeevan Jyoti Bima Yojana",
+      "category": "Financial Inclusion",
+      "benefit": "₹2 lakh life insurance cover",
+      "steps": {
+        "0": "Visit your bank branch",
+        "1": "Fill PMJJBY enrollment form",
+        "2": "Allow auto debit for yearly premium",
+        "3": "Insurance coverage starts"
+      }
+    },
+    "pmsby": {
+      "name": "Pradhan Mantri Suraksha Bima Yojana",
+      "category": "Financial Inclusion",
+      "benefit": "₹2 lakh accidental insurance",
+      "steps": {
+        "0": "Visit bank or use internet banking",
+        "1": "Enroll in PMSBY scheme",
+        "2": "Pay yearly premium",
+        "3": "Insurance coverage starts"
+      }
+    },
+    "pmay_urban": {
+      "name": "Pradhan Mantri Awas Yojana (Urban)",
+      "category": "Housing",
+      "benefit": "Subsidized housing loans",
+      "steps": {
+        "0": "Visit PMAY Urban portal",
+        "1": "Fill online application form",
+        "2": "Upload required documents",
+        "3": "Submit application for verification",
+        "4": "Loan subsidy approved through bank"
+      }
+    },
+    "pmay_rural": {
+      "name": "Pradhan Mantri Awas Yojana (Rural)",
+      "category": "Housing",
+      "benefit": "Financial assistance for rural housing",
+      "steps": {
+        "0": "Visit Gram Panchayat office",
+        "1": "Check name in rural housing beneficiary list",
+        "2": "Submit Aadhaar and bank details",
+        "3": "Housing assistance approved"
+      }
+    },
+    "pm_kisan": {
+      "name": "PM Kisan Samman Nidhi",
+      "category": "Agriculture",
+      "benefit": "₹6000 per year support to farmers",
+      "steps": {
+        "0": "Visit PM Kisan portal",
+        "1": "Click New Farmer Registration",
+        "2": "Enter Aadhaar and land details",
+        "3": "Submit application",
+        "4": "Receive yearly financial support"
+      }
+    },
+    "pm_fasal_bima": {
+      "name": "Pradhan Mantri Fasal Bima Yojana",
+      "category": "Agriculture",
+      "benefit": "Crop insurance scheme for farmers",
+      "steps": {
+        "0": "Visit PMFBY portal or bank",
+        "1": "Register crop and land details",
+        "2": "Pay insurance premium",
+        "3": "Crop insurance activated"
+      }
+    },
+    "pm_krishi_sinchai": {
+      "name": "Pradhan Mantri Krishi Sinchai Yojana",
+      "category": "Agriculture",
+      "benefit": "Irrigation support for farmers",
+      "steps": {
+        "0": "Visit agriculture department office",
+        "1": "Submit irrigation plan",
+        "2": "Field inspection conducted",
+        "3": "Receive irrigation subsidy"
+      }
+    },
+    "sukanya": {
+      "name": "Sukanya Samriddhi Yojana",
+      "category": "Women & Child Welfare",
+      "benefit": "Savings scheme for girl child",
+      "steps": {
+        "0": "Visit nearest bank or post office",
+        "1": "Ask for Sukanya Samriddhi account form",
+        "2": "Submit birth certificate and Aadhaar details",
+        "3": "Deposit minimum amount to open account"
+      }
+    },
+    "beti_bachao": {
+      "name": "Beti Bachao Beti Padhao",
+      "category": "Women & Child Welfare",
+      "benefit": "Girl child education and welfare program",
+      "steps": {
+        "0": "Visit local district office or Anganwadi center",
+        "1": "Register the girl child",
+        "2": "Access education and awareness programs"
+      }
+    },
+    "ujjwala": {
+      "name": "PM Ujjwala Yojana",
+      "category": "Women & Child Welfare",
+      "benefit": "Free LPG connection for poor households",
+      "steps": {
+        "0": "Visit nearest LPG distributor",
+        "1": "Fill Ujjwala application form",
+        "2": "Submit KYC documents",
+        "3": "Receive LPG connection"
+      }
+    },
+    "poshan": {
+      "name": "POSHAN Abhiyaan",
+      "category": "Women & Child Welfare",
+      "benefit": "Nutrition support for mothers and children",
+      "steps": {
+        "0": "Visit nearest Anganwadi center",
+        "1": "Register child in nutrition program",
+        "2": "Receive health checkups and nutrition support"
+      }
+    },
+    "pmkvy": {
+      "name": "Pradhan Mantri Kaushal Vikas Yojana",
+      "category": "Employment / Skill",
+      "benefit": "Free skill development training",
+      "steps": {
+        "0": "Visit PMKVY official website",
+        "1": "Search nearby training center",
+        "2": "Register for skill course",
+        "3": "Complete training and certification"
+      }
+    },
+    "ddugky": {
+      "name": "Deen Dayal Upadhyaya Grameen Kaushalya Yojana",
+      "category": "Employment / Skill",
+      "benefit": "Skill training and job placement",
+      "steps": {
+        "0": "Visit rural development office",
+        "1": "Register for training program",
+        "2": "Attend skill training",
+        "3": "Receive placement assistance"
+      }
+    },
+    "pmegp": {
+      "name": "Prime Minister Employment Generation Programme",
+      "category": "Employment / Skill",
+      "benefit": "Subsidy for starting small enterprises",
+      "steps": {
+        "0": "Visit KVIC online portal",
+        "1": "Fill PMEGP application form",
+        "2": "Upload project report",
+        "3": "Bank reviews and approves loan"
+      }
+    },
+    "mudra": {
+      "name": "Pradhan Mantri Mudra Yojana",
+      "category": "Business / Startup",
+      "benefit": "Loans up to ₹10 lakh for small businesses",
+      "steps": {
+        "0": "Visit bank or NBFC",
+        "1": "Select Mudra loan category",
+        "2": "Submit required documents",
+        "3": "Loan approved after verification"
+      }
+    },
+    "standup_india": {
+      "name": "Stand Up India Scheme",
+      "category": "Business / Startup",
+      "benefit": "Bank loans for SC/ST and women entrepreneurs",
+      "steps": {
+        "0": "Visit Stand Up India portal",
+        "1": "Fill loan request form",
+        "2": "Bank contacts applicant",
+        "3": "Loan sanctioned after approval"
+      }
+    },
+    "startup_india": {
+      "name": "Startup India",
+      "category": "Business / Startup",
+      "benefit": "Government support for startups",
+      "steps": {
+        "0": "Visit Startup India portal",
+        "1": "Register startup profile",
+        "2": "Upload required documents",
+        "3": "Apply for startup recognition"
+      }
+    },
+    "atal_pension": {
+      "name": "Atal Pension Yojana",
+      "category": "Pension / Social Security",
+      "benefit": "Guaranteed pension after age 60",
+      "steps": {
+        "0": "Visit bank branch",
+        "1": "Fill Atal Pension Yojana form",
+        "2": "Select pension amount",
+        "3": "Enable automatic monthly deduction"
+      }
+    },
+    "nsap": {
+      "name": "National Social Assistance Programme",
+      "category": "Pension / Social Security",
+      "benefit": "Pension support for elderly and vulnerable groups",
+      "steps": {
+        "0": "Apply through local municipal office or Panchayat",
+        "1": "Submit required documents",
+        "2": "Verification completed",
+        "3": "Pension credited to bank"
+      }
+    },
+    "jal_jeevan": {
+      "name": "Jal Jeevan Mission",
+      "category": "Infrastructure / Welfare",
+      "benefit": "Household tap water connections",
+      "steps": {
+        "0": "Register through Gram Panchayat",
+        "1": "Household survey conducted",
+        "2": "Tap water connection installed"
+      }
+    },
+    "swachh_bharat": {
+      "name": "Swachh Bharat Mission",
+      "category": "Infrastructure / Welfare",
+      "benefit": "Toilet construction support",
+      "steps": {
+        "0": "Apply at local municipal office",
+        "1": "Submit toilet construction request",
+        "2": "Verification by authorities",
+        "3": "Receive subsidy"
+      }
+    },
+    "digital_india": {
+      "name": "Digital India Mission",
+      "category": "Infrastructure / Welfare",
+      "benefit": "Digital access and services for citizens",
+      "steps": {
+        "0": "Visit nearest Common Service Centre",
+        "1": "Register for digital literacy training",
+        "2": "Attend training sessions",
+        "3": "Receive certificate"
+      }
+    }
   },
   "faq": {
     "titleBadge": "FAQs",
@@ -187,6 +553,33 @@
     "Bank account details": "Bank account details",
     "Passport photo": "Passport photo",
     "Voter ID": "Voter ID",
-    "Birth certificate": "Birth certificate"
+    "Birth certificate": "Birth certificate",
+    "Pharmacy license": "Pharmacy license",
+    "Pharmacist certificate": "Pharmacist certificate",
+    "Bank account": "Bank account",
+    "Consent form": "Consent form",
+    "Property documents": "Property documents",
+    "Passport size photo": "Passport size photo",
+    "BPL ration card": "BPL ration card",
+    "MGNREGA job card": "MGNREGA job card",
+    "Land ownership records": "Land ownership records",
+    "Land records": "Land records",
+    "Crop details": "Crop details",
+    "Irrigation plan": "Irrigation plan",
+    "Birth certificate of girl child": "Birth certificate of girl child",
+    "Aadhaar card of parent or guardian": "Aadhaar card of parent or guardian",
+    "Aadhaar card of parent": "Aadhaar card of parent",
+    "Birth certificate of child": "Birth certificate of child",
+    "Health records": "Health records",
+    "Education certificate": "Education certificate",
+    "BPL card": "BPL card",
+    "Business project report": "Business project report",
+    "Business plan": "Business plan",
+    "Bank statement": "Bank statement",
+    "Company registration certificate": "Company registration certificate",
+    "Founder details": "Founder details",
+    "Startup pitch or business plan": "Startup pitch or business plan",
+    "Age proof": "Age proof",
+    "House details": "House details"
   }
 }

@@ -20,11 +20,11 @@
         "Mobile number"
       ],
       "application_steps": [
-        "Visit the PMJAY website or nearest CSC center",
-        "Check eligibility using Aadhaar or ration card",
-        "Complete Aadhaar eKYC",
-        "Verify family details",
-        "Download or print Ayushman card"
+        "schemes.ayushman_bharat.steps.0",
+        "schemes.ayushman_bharat.steps.1",
+        "schemes.ayushman_bharat.steps.2",
+        "schemes.ayushman_bharat.steps.3",
+        "schemes.ayushman_bharat.steps.4"
       ],
       "official_link": "https://nha.gov.in/PM-JAY"
     },
@@ -44,11 +44,11 @@
         "Bank account details"
       ],
       "application_steps": [
-        "Visit Janaushadhi official website",
-        "Download store application form",
-        "Attach required pharmacy documents",
-        "Submit application online or offline",
-        "Wait for approval to open store"
+        "schemes.jan_aushadhi.steps.0",
+        "schemes.jan_aushadhi.steps.1",
+        "schemes.jan_aushadhi.steps.2",
+        "schemes.jan_aushadhi.steps.3",
+        "schemes.jan_aushadhi.steps.4"
       ],
       "official_link": "http://janaushadhi.gov.in/"
     },
@@ -74,10 +74,10 @@
         "Mobile number"
       ],
       "application_steps": [
-        "Visit nearest bank branch",
-        "Ask for Jan Dhan account form",
-        "Submit ID proof and photo",
-        "Bank opens zero balance account"
+        "schemes.jan_dhan.steps.0",
+        "schemes.jan_dhan.steps.1",
+        "schemes.jan_dhan.steps.2",
+        "schemes.jan_dhan.steps.3"
       ],
       "official_link": "https://pmjdy.gov.in/"
     },
@@ -101,10 +101,10 @@
         "Consent form"
       ],
       "application_steps": [
-        "Visit your bank branch",
-        "Fill PMJJBY enrollment form",
-        "Allow auto debit for yearly premium",
-        "Insurance coverage starts"
+        "schemes.pmjjby.steps.0",
+        "schemes.pmjjby.steps.1",
+        "schemes.pmjjby.steps.2",
+        "schemes.pmjjby.steps.3"
       ],
       "official_link": "https://jansuraksha.gov.in/"
     },
@@ -128,10 +128,10 @@
         "Bank account details"
       ],
       "application_steps": [
-        "Visit bank or use internet banking",
-        "Enroll in PMSBY scheme",
-        "Pay yearly premium",
-        "Insurance coverage starts"
+        "schemes.pmsby.steps.0",
+        "schemes.pmsby.steps.1",
+        "schemes.pmsby.steps.2",
+        "schemes.pmsby.steps.3"
       ],
       "official_link": "https://jansuraksha.gov.in/"
     },
@@ -157,11 +157,11 @@
         "Passport photo"
       ],
       "application_steps": [
-        "Visit PMAY Urban portal",
-        "Fill online application form",
-        "Upload required documents",
-        "Submit application for verification",
-        "Loan subsidy approved through bank"
+        "schemes.pmay_urban.steps.0",
+        "schemes.pmay_urban.steps.1",
+        "schemes.pmay_urban.steps.2",
+        "schemes.pmay_urban.steps.3",
+        "schemes.pmay_urban.steps.4"
       ],
       "official_link": "https://pmay-urban.gov.in/"
     },
@@ -181,10 +181,10 @@
         "MGNREGA job card"
       ],
       "application_steps": [
-        "Visit Gram Panchayat office",
-        "Check name in rural housing beneficiary list",
-        "Submit Aadhaar and bank details",
-        "Housing assistance approved"
+        "schemes.pmay_rural.steps.0",
+        "schemes.pmay_rural.steps.1",
+        "schemes.pmay_rural.steps.2",
+        "schemes.pmay_rural.steps.3"
       ],
       "official_link": "https://pmayg.nic.in/"
     },
@@ -203,11 +203,11 @@
         "Mobile number"
       ],
       "application_steps": [
-        "Visit PM Kisan portal",
-        "Click New Farmer Registration",
-        "Enter Aadhaar and land details",
-        "Submit application",
-        "Receive yearly financial support"
+        "schemes.pm_kisan.steps.0",
+        "schemes.pm_kisan.steps.1",
+        "schemes.pm_kisan.steps.2",
+        "schemes.pm_kisan.steps.3",
+        "schemes.pm_kisan.steps.4"
       ],
       "official_link": "https://pmkisan.gov.in/"
     },
@@ -227,10 +227,10 @@
         "Crop details"
       ],
       "application_steps": [
-        "Visit PMFBY portal or bank",
-        "Register crop and land details",
-        "Pay insurance premium",
-        "Crop insurance activated"
+        "schemes.pm_fasal_bima.steps.0",
+        "schemes.pm_fasal_bima.steps.1",
+        "schemes.pm_fasal_bima.steps.2",
+        "schemes.pm_fasal_bima.steps.3"
       ],
       "official_link": "https://pmfby.gov.in/"
     },
@@ -249,10 +249,10 @@
         "Bank account"
       ],
       "application_steps": [
-        "Visit agriculture department office",
-        "Submit irrigation plan",
-        "Field inspection conducted",
-        "Receive irrigation subsidy"
+        "schemes.pm_krishi_sinchai.steps.0",
+        "schemes.pm_krishi_sinchai.steps.1",
+        "schemes.pm_krishi_sinchai.steps.2",
+        "schemes.pm_krishi_sinchai.steps.3"
       ],
       "official_link": "https://pmksy.gov.in/"
     },
@@ -271,10 +271,10 @@
         "Passport size photo"
       ],
       "application_steps": [
-        "Visit nearest bank or post office",
-        "Ask for Sukanya Samriddhi account form",
-        "Submit birth certificate and Aadhaar details",
-        "Deposit minimum amount to open account"
+        "schemes.sukanya.steps.0",
+        "schemes.sukanya.steps.1",
+        "schemes.sukanya.steps.2",
+        "schemes.sukanya.steps.3"
       ],
       "official_link": "https://www.indiapost.gov.in/Financial/pages/content/ssy.aspx"
     },
@@ -292,9 +292,9 @@
         "Address proof"
       ],
       "application_steps": [
-        "Visit local district office or Anganwadi center",
-        "Register the girl child",
-        "Access education and awareness programs"
+        "schemes.beti_bachao.steps.0",
+        "schemes.beti_bachao.steps.1",
+        "schemes.beti_bachao.steps.2"
       ],
       "official_link": "https://wcd.nic.in/schemes/beti-bachao-beti-padhao"
     },
@@ -314,10 +314,10 @@
         "Address proof"
       ],
       "application_steps": [
-        "Visit nearest LPG distributor",
-        "Fill Ujjwala application form",
-        "Submit KYC documents",
-        "Receive LPG connection"
+        "schemes.ujjwala.steps.0",
+        "schemes.ujjwala.steps.1",
+        "schemes.ujjwala.steps.2",
+        "schemes.ujjwala.steps.3"
       ],
       "official_link": "https://www.pmuy.gov.in/"
     },
@@ -335,9 +335,9 @@
         "Health records"
       ],
       "application_steps": [
-        "Visit nearest Anganwadi center",
-        "Register child in nutrition program",
-        "Receive health checkups and nutrition support"
+        "schemes.poshan.steps.0",
+        "schemes.poshan.steps.1",
+        "schemes.poshan.steps.2"
       ],
       "official_link": "https://poshanabhiyaan.gov.in/"
     },
@@ -360,10 +360,10 @@
         "Passport photo"
       ],
       "application_steps": [
-        "Visit PMKVY official website",
-        "Search nearby training center",
-        "Register for skill course",
-        "Complete training and certification"
+        "schemes.pmkvy.steps.0",
+        "schemes.pmkvy.steps.1",
+        "schemes.pmkvy.steps.2",
+        "schemes.pmkvy.steps.3"
       ],
       "official_link": "https://www.pmkvyofficial.org/"
     },
@@ -386,10 +386,10 @@
         "Bank account"
       ],
       "application_steps": [
-        "Visit rural development office",
-        "Register for training program",
-        "Attend skill training",
-        "Receive placement assistance"
+        "schemes.ddugky.steps.0",
+        "schemes.ddugky.steps.1",
+        "schemes.ddugky.steps.2",
+        "schemes.ddugky.steps.3"
       ],
       "official_link": "http://ddugky.gov.in/"
     },
@@ -414,10 +414,10 @@
         "Bank account"
       ],
       "application_steps": [
-        "Visit KVIC online portal",
-        "Fill PMEGP application form",
-        "Upload project report",
-        "Bank reviews and approves loan"
+        "schemes.pmegp.steps.0",
+        "schemes.pmegp.steps.1",
+        "schemes.pmegp.steps.2",
+        "schemes.pmegp.steps.3"
       ],
       "official_link": "https://www.kviconline.gov.in/pmegpportal/pmegpweb/index.jsp"
     },
@@ -440,10 +440,10 @@
         "Bank statement"
       ],
       "application_steps": [
-        "Visit bank or NBFC",
-        "Select Mudra loan category",
-        "Submit required documents",
-        "Loan approved after verification"
+        "schemes.mudra.steps.0",
+        "schemes.mudra.steps.1",
+        "schemes.mudra.steps.2",
+        "schemes.mudra.steps.3"
       ],
       "official_link": "https://www.mudra.org.in/"
     },
@@ -463,10 +463,10 @@
         "Bank account"
       ],
       "application_steps": [
-        "Visit Stand Up India portal",
-        "Fill loan request form",
-        "Bank contacts applicant",
-        "Loan sanctioned after approval"
+        "schemes.standup_india.steps.0",
+        "schemes.standup_india.steps.1",
+        "schemes.standup_india.steps.2",
+        "schemes.standup_india.steps.3"
       ],
       "official_link": "https://www.standupmitra.in/"
     },
@@ -485,10 +485,10 @@
         "Startup pitch or business plan"
       ],
       "application_steps": [
-        "Visit Startup India portal",
-        "Register startup profile",
-        "Upload required documents",
-        "Apply for startup recognition"
+        "schemes.startup_india.steps.0",
+        "schemes.startup_india.steps.1",
+        "schemes.startup_india.steps.2",
+        "schemes.startup_india.steps.3"
       ],
       "official_link": "https://www.startupindia.gov.in/"
     },
@@ -510,10 +510,10 @@
         "Mobile number"
       ],
       "application_steps": [
-        "Visit bank branch",
-        "Fill Atal Pension Yojana form",
-        "Select pension amount",
-        "Enable automatic monthly deduction"
+        "schemes.atal_pension.steps.0",
+        "schemes.atal_pension.steps.1",
+        "schemes.atal_pension.steps.2",
+        "schemes.atal_pension.steps.3"
       ],
       "official_link": "https://npscra.nsdl.co.in/scheme-details.php"
     },
@@ -535,10 +535,10 @@
         "Bank account"
       ],
       "application_steps": [
-        "Apply through local municipal office or Panchayat",
-        "Submit required documents",
-        "Verification completed",
-        "Pension credited to bank"
+        "schemes.nsap.steps.0",
+        "schemes.nsap.steps.1",
+        "schemes.nsap.steps.2",
+        "schemes.nsap.steps.3"
       ],
       "official_link": "https://nsap.nic.in/"
     },
@@ -556,9 +556,9 @@
         "House details"
       ],
       "application_steps": [
-        "Register through Gram Panchayat",
-        "Household survey conducted",
-        "Tap water connection installed"
+        "schemes.jal_jeevan.steps.0",
+        "schemes.jal_jeevan.steps.1",
+        "schemes.jal_jeevan.steps.2"
       ],
       "official_link": "https://jaljeevanmission.gov.in/"
     },
@@ -580,10 +580,10 @@
         "Address proof"
       ],
       "application_steps": [
-        "Apply at local municipal office",
-        "Submit toilet construction request",
-        "Verification by authorities",
-        "Receive subsidy"
+        "schemes.swachh_bharat.steps.0",
+        "schemes.swachh_bharat.steps.1",
+        "schemes.swachh_bharat.steps.2",
+        "schemes.swachh_bharat.steps.3"
       ],
       "official_link": "https://swachhbharatmission.gov.in/"
     },
@@ -606,10 +606,10 @@
         "Education details"
       ],
       "application_steps": [
-        "Visit nearest Common Service Centre",
-        "Register for digital literacy training",
-        "Attend training sessions",
-        "Receive certificate"
+        "schemes.digital_india.steps.0",
+        "schemes.digital_india.steps.1",
+        "schemes.digital_india.steps.2",
+        "schemes.digital_india.steps.3"
       ],
       "official_link": "https://www.digitalindia.gov.in/"
     }

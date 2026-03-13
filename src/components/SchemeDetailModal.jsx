@@ -219,7 +219,7 @@ const SchemeDetailModal = ({ scheme, isOpen, onClose }) => {
                         <span className="text-xl md:text-3xl font-black leading-none">{index + 1}</span>
                       </div>
                       <div className="bg-white p-8 md:p-12 rounded-[3rem] border border-gray-100 shadow-sm group-hover:shadow-2xl group-hover:border-primary/20 transition-all">
-                        <p className="text-textPrimary font-bold text-xl md:text-3xl leading-tight tracking-tight">{step}</p>
+                        <p className="text-textPrimary font-bold text-xl md:text-3xl leading-tight tracking-tight">{t(step)}</p>
                       </div>
                     </motion.div>
                   ))}
