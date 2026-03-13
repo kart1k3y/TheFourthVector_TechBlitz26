@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaArrowLeft, FaChevronRight } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import schemesData from '../data/schemes.json';
+import SchemeDetailModal from './SchemeDetailModal';
 
 // Map icon categories to scheme categories (English values as they appear in en/translation.json)
 const CATEGORY_MAP = {
@@ -22,6 +23,8 @@ const CATEGORY_COLORS = {
 
 const CategorySchemes = ({ category, icon, onBack }) => {
   const { t, i18n } = useTranslation();
+  const [selectedScheme, setSelectedScheme] = React.useState(null);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -75,16 +78,23 @@ const CategorySchemes = ({ category, icon, onBack }) => {
             {schemes.map((scheme, i) => (
               <div
                 key={scheme.id}
-                className={`flow-enter-child bg-white p-5 md:p-7 rounded-2xl shadow-sm border ${colors.border} hover:shadow-md transition-all hover:-translate-y-0.5`}
+                onClick={() => {
+                  setSelectedScheme(scheme);
+                  setIsModalOpen(true);
+                }}
+                className={`flow-enter-child bg-white p-5 md:p-7 rounded-2xl shadow-sm border ${colors.border} hover:shadow-md transition-all hover:-translate-y-0.5 cursor-pointer group flex flex-col`}
                 style={{ '--child-i': i + 2 }}
               >
                 <div className="flex items-start justify-between gap-3 mb-3">
-                  <h3 className="text-lg md:text-xl font-bold text-textPrimary leading-snug">
+                  <h3 className="text-lg md:text-xl font-bold text-textPrimary leading-snug group-hover:text-primary transition-colors">
                     {t(scheme.scheme_name)}
                   </h3>
-                  <span className={`flex-shrink-0 text-xs font-bold px-3 py-1 rounded-full ${colors.badge}`}>
-                    {t(scheme.scheme_category)}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className={`flex-shrink-0 text-xs font-bold px-3 py-1 rounded-full ${colors.badge}`}>
+                      {t(scheme.scheme_category)}
+                    </span>
+                    <FaChevronRight className="text-gray-300 group-hover:text-primary transition-colors" />
+                  </div>
                 </div>
                 <p className="text-textSecondary text-sm md:text-base leading-relaxed">
                   {t(scheme.scheme_benefit)}
@@ -95,6 +105,12 @@ const CategorySchemes = ({ category, icon, onBack }) => {
               </div>
             ))}
           </div>
+
+          <SchemeDetailModal 
+            scheme={selectedScheme}
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+          />
 
           {schemes.length === 0 && (
             <div className="flow-enter-child text-center py-20" style={{ '--child-i': 2 }}>

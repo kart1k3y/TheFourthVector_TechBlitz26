@@ -6,9 +6,27 @@
       "scheme_category": "schemes.ayushman_bharat.category",
       "scheme_benefit": "schemes.ayushman_bharat.benefit",
       "eligibility": {
-        "income": ["below_1L", "1_3L"],
+        "income": [
+          "below_1L",
+          "1_3L"
+        ],
         "bpl": "yes"
-      }
+      },
+      "documents_required": [
+        "Aadhaar card",
+        "Ration card",
+        "Income certificate",
+        "Address proof",
+        "Mobile number"
+      ],
+      "application_steps": [
+        "Visit the PMJAY website or nearest CSC center",
+        "Check eligibility using Aadhaar or ration card",
+        "Complete Aadhaar eKYC",
+        "Verify family details",
+        "Download or print Ayushman card"
+      ],
+      "official_link": "https://nha.gov.in/PM-JAY"
     },
     {
       "id": "jan_aushadhi",
@@ -17,7 +35,22 @@
       "scheme_benefit": "schemes.jan_aushadhi.benefit",
       "eligibility": {
         "interest": "healthcare"
-      }
+      },
+      "documents_required": [
+        "Aadhaar card",
+        "PAN card",
+        "Pharmacy license",
+        "Pharmacist certificate",
+        "Bank account details"
+      ],
+      "application_steps": [
+        "Visit Janaushadhi official website",
+        "Download store application form",
+        "Attach required pharmacy documents",
+        "Submit application online or offline",
+        "Wait for approval to open store"
+      ],
+      "official_link": "http://janaushadhi.gov.in/"
     },
     {
       "id": "jan_dhan",
@@ -25,10 +58,28 @@
       "scheme_category": "schemes.jan_dhan.category",
       "scheme_benefit": "schemes.jan_dhan.benefit",
       "eligibility": {
-        "age_group": ["18_25","26_40","41_60","60_plus"],
+        "age_group": [
+          "18_25",
+          "26_40",
+          "41_60",
+          "60_plus"
+        ],
         "bank_account": "no",
         "interest": "financial"
-      }
+      },
+      "documents_required": [
+        "Aadhaar card",
+        "Voter ID or PAN",
+        "Passport photo",
+        "Mobile number"
+      ],
+      "application_steps": [
+        "Visit nearest bank branch",
+        "Ask for Jan Dhan account form",
+        "Submit ID proof and photo",
+        "Bank opens zero balance account"
+      ],
+      "official_link": "https://pmjdy.gov.in/"
     },
     {
       "id": "pmjjby",
@@ -36,10 +87,26 @@
       "scheme_category": "schemes.pmjjby.category",
       "scheme_benefit": "schemes.pmjjby.benefit",
       "eligibility": {
-        "age_group": ["18_25","26_40","41_60"],
+        "age_group": [
+          "18_25",
+          "26_40",
+          "41_60"
+        ],
         "bank_account": "yes",
         "interest": "financial"
-      }
+      },
+      "documents_required": [
+        "Aadhaar card",
+        "Bank account details",
+        "Consent form"
+      ],
+      "application_steps": [
+        "Visit your bank branch",
+        "Fill PMJJBY enrollment form",
+        "Allow auto debit for yearly premium",
+        "Insurance coverage starts"
+      ],
+      "official_link": "https://jansuraksha.gov.in/"
     },
     {
       "id": "pmsby",
@@ -47,10 +114,26 @@
       "scheme_category": "schemes.pmsby.category",
       "scheme_benefit": "schemes.pmsby.benefit",
       "eligibility": {
-        "age_group": ["18_25","26_40","41_60","60_plus"],
+        "age_group": [
+          "18_25",
+          "26_40",
+          "41_60",
+          "60_plus"
+        ],
         "bank_account": "yes",
         "interest": "financial"
-      }
+      },
+      "documents_required": [
+        "Aadhaar card",
+        "Bank account details"
+      ],
+      "application_steps": [
+        "Visit bank or use internet banking",
+        "Enroll in PMSBY scheme",
+        "Pay yearly premium",
+        "Insurance coverage starts"
+      ],
+      "official_link": "https://jansuraksha.gov.in/"
     },
     {
       "id": "pmay_urban",
@@ -59,9 +142,28 @@
       "scheme_benefit": "schemes.pmay_urban.benefit",
       "eligibility": {
         "residence": "urban",
-        "income": ["below_1L","1_3L","3_6L"],
+        "income": [
+          "below_1L",
+          "1_3L",
+          "3_6L"
+        ],
         "interest": "housing"
-      }
+      },
+      "documents_required": [
+        "Aadhaar card",
+        "Income certificate",
+        "Bank account",
+        "Property documents",
+        "Passport photo"
+      ],
+      "application_steps": [
+        "Visit PMAY Urban portal",
+        "Fill online application form",
+        "Upload required documents",
+        "Submit application for verification",
+        "Loan subsidy approved through bank"
+      ],
+      "official_link": "https://pmay-urban.gov.in/"
     },
     {
       "id": "pmay_rural",
@@ -71,7 +173,20 @@
       "eligibility": {
         "residence": "rural",
         "bpl": "yes"
-      }
+      },
+      "documents_required": [
+        "Aadhaar card",
+        "BPL ration card",
+        "Bank account",
+        "MGNREGA job card"
+      ],
+      "application_steps": [
+        "Visit Gram Panchayat office",
+        "Check name in rural housing beneficiary list",
+        "Submit Aadhaar and bank details",
+        "Housing assistance approved"
+      ],
+      "official_link": "https://pmayg.nic.in/"
     },
     {
       "id": "pm_kisan",
@@ -80,7 +195,21 @@
       "scheme_benefit": "schemes.pm_kisan.benefit",
       "eligibility": {
         "occupation": "farmer"
-      }
+      },
+      "documents_required": [
+        "Aadhaar card",
+        "Land ownership records",
+        "Bank account",
+        "Mobile number"
+      ],
+      "application_steps": [
+        "Visit PM Kisan portal",
+        "Click New Farmer Registration",
+        "Enter Aadhaar and land details",
+        "Submit application",
+        "Receive yearly financial support"
+      ],
+      "official_link": "https://pmkisan.gov.in/"
     },
     {
       "id": "pm_fasal_bima",
@@ -90,7 +219,20 @@
       "eligibility": {
         "occupation": "farmer",
         "residence": "rural"
-      }
+      },
+      "documents_required": [
+        "Aadhaar card",
+        "Land records",
+        "Bank account",
+        "Crop details"
+      ],
+      "application_steps": [
+        "Visit PMFBY portal or bank",
+        "Register crop and land details",
+        "Pay insurance premium",
+        "Crop insurance activated"
+      ],
+      "official_link": "https://pmfby.gov.in/"
     },
     {
       "id": "pm_krishi_sinchai",
@@ -100,7 +242,19 @@
       "eligibility": {
         "occupation": "farmer",
         "residence": "rural"
-      }
+      },
+      "documents_required": [
+        "Aadhaar card",
+        "Land records",
+        "Bank account"
+      ],
+      "application_steps": [
+        "Visit agriculture department office",
+        "Submit irrigation plan",
+        "Field inspection conducted",
+        "Receive irrigation subsidy"
+      ],
+      "official_link": "https://pmksy.gov.in/"
     },
     {
       "id": "sukanya",
@@ -109,7 +263,20 @@
       "scheme_benefit": "schemes.sukanya.benefit",
       "eligibility": {
         "girl_child": "yes"
-      }
+      },
+      "documents_required": [
+        "Birth certificate of girl child",
+        "Aadhaar card of parent or guardian",
+        "Address proof",
+        "Passport size photo"
+      ],
+      "application_steps": [
+        "Visit nearest bank or post office",
+        "Ask for Sukanya Samriddhi account form",
+        "Submit birth certificate and Aadhaar details",
+        "Deposit minimum amount to open account"
+      ],
+      "official_link": "https://www.indiapost.gov.in/Financial/pages/content/ssy.aspx"
     },
     {
       "id": "beti_bachao",
@@ -118,7 +285,18 @@
       "scheme_benefit": "schemes.beti_bachao.benefit",
       "eligibility": {
         "girl_child": "yes"
-      }
+      },
+      "documents_required": [
+        "Birth certificate of girl child",
+        "Aadhaar card of parent",
+        "Address proof"
+      ],
+      "application_steps": [
+        "Visit local district office or Anganwadi center",
+        "Register the girl child",
+        "Access education and awareness programs"
+      ],
+      "official_link": "https://wcd.nic.in/schemes/beti-bachao-beti-padhao"
     },
     {
       "id": "ujjwala",
@@ -128,7 +306,20 @@
       "eligibility": {
         "gender": "female",
         "bpl": "yes"
-      }
+      },
+      "documents_required": [
+        "Aadhaar card",
+        "BPL ration card",
+        "Bank account details",
+        "Address proof"
+      ],
+      "application_steps": [
+        "Visit nearest LPG distributor",
+        "Fill Ujjwala application form",
+        "Submit KYC documents",
+        "Receive LPG connection"
+      ],
+      "official_link": "https://www.pmuy.gov.in/"
     },
     {
       "id": "poshan",
@@ -137,7 +328,18 @@
       "scheme_benefit": "schemes.poshan.benefit",
       "eligibility": {
         "children_under10": "yes"
-      }
+      },
+      "documents_required": [
+        "Birth certificate of child",
+        "Aadhaar card of parent",
+        "Health records"
+      ],
+      "application_steps": [
+        "Visit nearest Anganwadi center",
+        "Register child in nutrition program",
+        "Receive health checkups and nutrition support"
+      ],
+      "official_link": "https://poshanabhiyaan.gov.in/"
     },
     {
       "id": "pmkvy",
@@ -145,9 +347,25 @@
       "scheme_category": "schemes.pmkvy.category",
       "scheme_benefit": "schemes.pmkvy.benefit",
       "eligibility": {
-        "age_group": ["18_25","26_40"],
+        "age_group": [
+          "18_25",
+          "26_40"
+        ],
         "interest": "education"
-      }
+      },
+      "documents_required": [
+        "Aadhaar card",
+        "Education certificate",
+        "Bank account",
+        "Passport photo"
+      ],
+      "application_steps": [
+        "Visit PMKVY official website",
+        "Search nearby training center",
+        "Register for skill course",
+        "Complete training and certification"
+      ],
+      "official_link": "https://www.pmkvyofficial.org/"
     },
     {
       "id": "ddugky",
@@ -156,8 +374,24 @@
       "scheme_benefit": "schemes.ddugky.benefit",
       "eligibility": {
         "residence": "rural",
-        "age_group": ["18_25","26_40"]
-      }
+        "age_group": [
+          "18_25",
+          "26_40"
+        ]
+      },
+      "documents_required": [
+        "Aadhaar card",
+        "BPL card",
+        "Education certificate",
+        "Bank account"
+      ],
+      "application_steps": [
+        "Visit rural development office",
+        "Register for training program",
+        "Attend skill training",
+        "Receive placement assistance"
+      ],
+      "official_link": "http://ddugky.gov.in/"
     },
     {
       "id": "pmegp",
@@ -166,8 +400,26 @@
       "scheme_benefit": "schemes.pmegp.benefit",
       "eligibility": {
         "interest": "business",
-        "age_group": ["18_25","26_40","41_60"]
-      }
+        "age_group": [
+          "18_25",
+          "26_40",
+          "41_60"
+        ]
+      },
+      "documents_required": [
+        "Aadhaar card",
+        "PAN card",
+        "Business project report",
+        "Education certificate",
+        "Bank account"
+      ],
+      "application_steps": [
+        "Visit KVIC online portal",
+        "Fill PMEGP application form",
+        "Upload project report",
+        "Bank reviews and approves loan"
+      ],
+      "official_link": "https://www.kviconline.gov.in/pmegpportal/pmegpweb/index.jsp"
     },
     {
       "id": "mudra",
@@ -175,9 +427,25 @@
       "scheme_category": "schemes.mudra.category",
       "scheme_benefit": "schemes.mudra.benefit",
       "eligibility": {
-        "occupation": ["self_employed","business_owner"],
+        "occupation": [
+          "self_employed",
+          "business_owner"
+        ],
         "interest": "business"
-      }
+      },
+      "documents_required": [
+        "Aadhaar card",
+        "PAN card",
+        "Business plan",
+        "Bank statement"
+      ],
+      "application_steps": [
+        "Visit bank or NBFC",
+        "Select Mudra loan category",
+        "Submit required documents",
+        "Loan approved after verification"
+      ],
+      "official_link": "https://www.mudra.org.in/"
     },
     {
       "id": "standup_india",
@@ -187,7 +455,20 @@
       "eligibility": {
         "gender": "female",
         "interest": "business"
-      }
+      },
+      "documents_required": [
+        "Aadhaar card",
+        "PAN card",
+        "Business plan",
+        "Bank account"
+      ],
+      "application_steps": [
+        "Visit Stand Up India portal",
+        "Fill loan request form",
+        "Bank contacts applicant",
+        "Loan sanctioned after approval"
+      ],
+      "official_link": "https://www.standupmitra.in/"
     },
     {
       "id": "startup_india",
@@ -196,7 +477,20 @@
       "scheme_benefit": "schemes.startup_india.benefit",
       "eligibility": {
         "interest": "business"
-      }
+      },
+      "documents_required": [
+        "Company registration certificate",
+        "PAN card",
+        "Founder details",
+        "Startup pitch or business plan"
+      ],
+      "application_steps": [
+        "Visit Startup India portal",
+        "Register startup profile",
+        "Upload required documents",
+        "Apply for startup recognition"
+      ],
+      "official_link": "https://www.startupindia.gov.in/"
     },
     {
       "id": "atal_pension",
@@ -204,9 +498,24 @@
       "scheme_category": "schemes.atal_pension.category",
       "scheme_benefit": "schemes.atal_pension.benefit",
       "eligibility": {
-        "age_group": ["18_25","26_40"],
+        "age_group": [
+          "18_25",
+          "26_40"
+        ],
         "interest": "financial"
-      }
+      },
+      "documents_required": [
+        "Aadhaar card",
+        "Bank account",
+        "Mobile number"
+      ],
+      "application_steps": [
+        "Visit bank branch",
+        "Fill Atal Pension Yojana form",
+        "Select pension amount",
+        "Enable automatic monthly deduction"
+      ],
+      "official_link": "https://npscra.nsdl.co.in/scheme-details.php"
     },
     {
       "id": "nsap",
@@ -214,9 +523,24 @@
       "scheme_category": "schemes.nsap.category",
       "scheme_benefit": "schemes.nsap.benefit",
       "eligibility": {
-        "age_group": ["60_plus"],
+        "age_group": [
+          "60_plus"
+        ],
         "bpl": "yes"
-      }
+      },
+      "documents_required": [
+        "Aadhaar card",
+        "BPL ration card",
+        "Age proof",
+        "Bank account"
+      ],
+      "application_steps": [
+        "Apply through local municipal office or Panchayat",
+        "Submit required documents",
+        "Verification completed",
+        "Pension credited to bank"
+      ],
+      "official_link": "https://nsap.nic.in/"
     },
     {
       "id": "jal_jeevan",
@@ -225,7 +549,18 @@
       "scheme_benefit": "schemes.jal_jeevan.benefit",
       "eligibility": {
         "residence": "rural"
-      }
+      },
+      "documents_required": [
+        "Aadhaar card",
+        "Address proof",
+        "House details"
+      ],
+      "application_steps": [
+        "Register through Gram Panchayat",
+        "Household survey conducted",
+        "Tap water connection installed"
+      ],
+      "official_link": "https://jaljeevanmission.gov.in/"
     },
     {
       "id": "swachh_bharat",
@@ -233,9 +568,24 @@
       "scheme_category": "schemes.swachh_bharat.category",
       "scheme_benefit": "schemes.swachh_bharat.benefit",
       "eligibility": {
-        "residence": ["rural","urban"],
+        "residence": [
+          "rural",
+          "urban"
+        ],
         "bpl": "yes"
-      }
+      },
+      "documents_required": [
+        "Aadhaar card",
+        "BPL ration card",
+        "Address proof"
+      ],
+      "application_steps": [
+        "Apply at local municipal office",
+        "Submit toilet construction request",
+        "Verification by authorities",
+        "Receive subsidy"
+      ],
+      "official_link": "https://swachhbharatmission.gov.in/"
     },
     {
       "id": "digital_india",
@@ -243,9 +593,25 @@
       "scheme_category": "schemes.digital_india.category",
       "scheme_benefit": "schemes.digital_india.benefit",
       "eligibility": {
-        "age_group": ["18_25","26_40","41_60"],
+        "age_group": [
+          "18_25",
+          "26_40",
+          "41_60"
+        ],
         "interest": "education"
-      }
+      },
+      "documents_required": [
+        "Aadhaar card",
+        "Mobile number",
+        "Education details"
+      ],
+      "application_steps": [
+        "Visit nearest Common Service Centre",
+        "Register for digital literacy training",
+        "Attend training sessions",
+        "Receive certificate"
+      ],
+      "official_link": "https://www.digitalindia.gov.in/"
     }
   ]
 }

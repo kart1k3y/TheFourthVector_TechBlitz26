@@ -3,12 +3,15 @@ import { FaArrowLeft, FaCheckCircle, FaChevronRight } from 'react-icons/fa';
 import questionsData from '../data/questions.json';
 import schemesData from '../data/schemes.json';
 import { useTranslation } from 'react-i18next';
+import SchemeDetailModal from './SchemeDetailModal';
 
 const EligibilityFlow = ({ onBack }) => {
   const { t } = useTranslation();
   const [answers, setAnswers] = useState({});
   const [currentTile, setCurrentTile] = useState(1);
   const [isFinished, setIsFinished] = useState(false);
+  const [selectedScheme, setSelectedScheme] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -227,14 +230,31 @@ const EligibilityFlow = ({ onBack }) => {
 
             <div className="space-y-6">
               {results.map((scheme, i) => (
-                <div key={scheme.id} className="p-6 border border-gray-100 rounded-xl bg-gray-50 hover:shadow-md transition-shadow flow-enter-child" style={{ '--child-i': i + 2 }}>
-                  <span className="text-sm font-bold text-primary bg-indigo-50 px-3 py-1 rounded-full mb-3 inline-block">{t(scheme.scheme_category)}</span>
-                  <h3 className="text-xl font-bold mb-2">{t(scheme.scheme_name)}</h3>
-                  <p className="text-textSecondary mb-4 text-sm">{t(scheme.scheme_benefit)}</p>
+                <div 
+                  key={scheme.id} 
+                  onClick={() => {
+                    setSelectedScheme(scheme);
+                    setIsModalOpen(true);
+                  }}
+                  className="p-6 border border-gray-100 rounded-xl bg-gray-50 hover:shadow-md transition-all cursor-pointer hover:border-primary/30 group flow-enter-child" 
+                  style={{ '--child-i': i + 2 }}
+                >
+                  <div className="flex justify-between items-start mb-3">
+                    <span className="text-sm font-bold text-primary bg-indigo-50 px-3 py-1 rounded-full">{t(scheme.scheme_category)}</span>
+                    <FaChevronRight className="text-gray-300 group-hover:text-primary transition-colors" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{t(scheme.scheme_name)}</h3>
+                  <p className="text-textSecondary text-sm">{t(scheme.scheme_benefit)}</p>
                 </div>
               ))}
             </div>
           </div>
+
+          <SchemeDetailModal 
+            scheme={selectedScheme}
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+          />
 
           <div className="text-center mt-10 flow-enter-child" style={{ '--child-i': results.length + 2 }}>
             <button onClick={onBack} className="bg-textPrimary text-white px-8 py-3 rounded-xl font-semibold hover:bg-black transition-colors">

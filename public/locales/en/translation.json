@@ -165,5 +165,28 @@
   },
   "landing": {
     "viewCategory": "View {{category}} schemes"
+  },
+  "schemeDetails": {
+    "overview": "Overview",
+    "benefits": "Key Benefits",
+    "eligibility": "Eligibility Criteria",
+    "documents": "Required Documents",
+    "howToApply": "How to Apply",
+    "officialWebsite": "Official Website",
+    "visitSite": "Visit Official Site",
+    "websiteInfo": "For more information and to apply, please visit the official portal:",
+    "close": "Close"
+  },
+  "docs": {
+    "Aadhaar card": "Aadhaar card",
+    "Ration card": "Ration card",
+    "Income certificate": "Income certificate",
+    "Address proof": "Address proof",
+    "Mobile number": "Mobile number",
+    "PAN card": "PAN card",
+    "Bank account details": "Bank account details",
+    "Passport photo": "Passport photo",
+    "Voter ID": "Voter ID",
+    "Birth certificate": "Birth certificate"
   }
 }

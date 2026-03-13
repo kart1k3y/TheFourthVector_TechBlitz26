@@ -165,5 +165,28 @@
   },
   "landing": {
     "viewCategory": "{{category}} योजनाएं देखें"
+  },
+  "schemeDetails": {
+    "overview": "विवरण",
+    "benefits": "मुख्य लाभ",
+    "eligibility": "पात्रता मानदंड",
+    "documents": "आवश्यक दस्तावेज़",
+    "howToApply": "आवेदन कैसे करें",
+    "officialWebsite": "आधिकारिक वेबसाइट",
+    "visitSite": "आधिकारिक साइट पर जाएं",
+    "websiteInfo": "अधिक जानकारी और आवेदन करने के लिए, कृपया आधिकारिक पोर्टल पर जाएं:",
+    "close": "बंद करें"
+  },
+  "docs": {
+    "Aadhaar card": "आधार कार्ड",
+    "Ration card": "राशन कार्ड",
+    "Income certificate": "आय प्रमाण पत्र",
+    "Address proof": "पते का प्रमाण",
+    "Mobile number": "मोबाइल नंबर",
+    "PAN card": "पैन कार्ड",
+    "Bank account details": "बैंक खाते का विवरण",
+    "Passport photo": "पासपोर्ट फोटो",
+    "Voter ID": "मतदाता पहचान पत्र",
+    "Birth certificate": "जन्म प्रमाण पत्र"
   }
 }
