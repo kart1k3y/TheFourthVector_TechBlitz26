@@ -27,7 +27,7 @@ const EligibilityFlow = ({ onBack }) => {
 
       // Special dynamic skips based on previous answers to make it "intelligent"
       let skipQuestion = false;
-      
+
       if (currentId === 'Q12' || currentId === 'Q13') {
         // If household size is 1, they don't have children or girl children to ask about
         if (answers['Q11'] === '1') {
@@ -73,18 +73,18 @@ const EligibilityFlow = ({ onBack }) => {
   const handleAnswer = (qId, value, type) => {
     setAnswers(prev => {
       const newAnswers = { ...prev };
-      
+
       if (type === 'multi_select') {
         let currentArr = newAnswers[qId] || [];
         if (value === 'none') {
-            currentArr = ['none'];
+          currentArr = ['none'];
         } else {
-            currentArr = currentArr.filter(v => v !== 'none');
-            if (currentArr.includes(value)) {
-                currentArr = currentArr.filter(v => v !== value);
-            } else {
-                currentArr.push(value);
-            }
+          currentArr = currentArr.filter(v => v !== 'none');
+          if (currentArr.includes(value)) {
+            currentArr = currentArr.filter(v => v !== value);
+          } else {
+            currentArr.push(value);
+          }
         }
         newAnswers[qId] = currentArr;
         if (currentArr.length === 0) delete newAnswers[qId];
@@ -102,36 +102,36 @@ const EligibilityFlow = ({ onBack }) => {
         let matchCount = 0;
         let failCount = 0;
         let totalAnswered = 0;
-        
+
         // Loop through all criteria keys (e.g., 'income', 'bpl', 'age_group')
         for (const [key, value] of Object.entries(scheme.eligibility)) {
           // If the key exists in our answers map
           // Some keys might map slightly differently, e.g., documents is a multi_select
-          
+
           if (key === 'documents') {
-             // value is an array of REQUIRED documents, e.g. ["aadhaar", "ration_card"]
-             const docAnswer = answers['Q23']; // Q23 is documents in questions.json
-             if (docAnswer !== undefined) {
-               totalAnswered++;
-               const userDocs = docAnswer || []; 
-               const hasAllRequired = value.every(reqDoc => userDocs.includes(reqDoc));
-               if (hasAllRequired) {
-                 matchCount++;
-               } else {
-                 failCount++;
-               }
-             }
-             continue;
+            // value is an array of REQUIRED documents, e.g. ["aadhaar", "ration_card"]
+            const docAnswer = answers['Q23']; // Q23 is documents in questions.json
+            if (docAnswer !== undefined) {
+              totalAnswered++;
+              const userDocs = docAnswer || [];
+              const hasAllRequired = value.every(reqDoc => userDocs.includes(reqDoc));
+              if (hasAllRequired) {
+                matchCount++;
+              } else {
+                failCount++;
+              }
+            }
+            continue;
           }
-          
+
           // Let's find if the user answered the question matching this field
           const questionId = Object.keys(questionsData.questions).find(
             qId => questionsData.questions[qId].field === key
           );
-          
+
           if (questionId) {
             const userAnswer = answers[questionId];
-            
+
             if (userAnswer !== undefined && userAnswer !== null && userAnswer !== '') {
               totalAnswered++;
               // If the required criteria is an array of allowed values
@@ -152,16 +152,16 @@ const EligibilityFlow = ({ onBack }) => {
             }
           }
         }
-        
+
         // The scheme should be considered eligible if the majority of eligibility conditions match the user answers.
         // If no criteria were answered, we'll consider it eligible (or you could change this to require at least 1 match)
         if (totalAnswered > 0) {
           return matchCount >= failCount;
         }
-        
-        return true; 
+
+        return true;
       }
-      
+
       return true; // Default to true if no specific eligibility block
     });
   };
@@ -169,7 +169,7 @@ const EligibilityFlow = ({ onBack }) => {
   const proceedNext = () => {
     const lastAnswered = visibleQuestions[visibleQuestions.length - 1];
     let nextNode = lastAnswered.next;
-    
+
     // For single_select it may have specific routing on the selected option
     if (lastAnswered.type === 'single_select' && lastAnswered.options) {
       const option = lastAnswered.options.find(opt => opt.value === answers[lastAnswered.id]);
@@ -187,12 +187,12 @@ const EligibilityFlow = ({ onBack }) => {
     const results = calculateResults();
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col items-center py-10 px-4 z-50 relative">
-        <div className="w-full max-w-3xl">
-          <button onClick={() => setIsFinished(false)} className="text-primary flex items-center mb-6 hover:underline font-semibold">
-            <FaArrowLeft className="mr-2" /> {t('eligibility.backToQuestions')}
+        <div key="results" className="w-full max-w-3xl flow-enter">
+          <button onClick={() => setIsFinished(false)} className="text-primary flex items-center mb-6 hover:underline font-semibold flow-enter-child" style={{ '--child-i': 0 }}>
+            <FaArrowLeft className="mr-2" /> Back to questions
           </button>
-          
-          <div className="bg-white p-6 md:p-10 rounded-2xl shadow-xl border border-gray-100 mb-8">
+
+          <div className="bg-white p-6 md:p-10 rounded-2xl shadow-xl border border-gray-100 mb-8 flow-enter-child" style={{ '--child-i': 1 }}>
             <div className="flex items-center space-x-4 mb-6">
               <FaCheckCircle className="text-4xl text-green-500" />
               <h2 className="text-2xl md:text-3xl font-bold text-textPrimary">{t('eligibility.titleResults')}</h2>
@@ -200,8 +200,8 @@ const EligibilityFlow = ({ onBack }) => {
             <p className="text-textSecondary mb-8 text-lg">{t('eligibility.resultsFound', { count: results.length })}</p>
 
             <div className="space-y-6">
-              {results.map(scheme => (
-                <div key={scheme.id} className="p-6 border border-gray-100 rounded-xl bg-gray-50 hover:shadow-md transition-shadow">
+              {results.map((scheme, i) => (
+                <div key={scheme.id} className="p-6 border border-gray-100 rounded-xl bg-gray-50 hover:shadow-md transition-shadow flow-enter-child" style={{ '--child-i': i + 2 }}>
                   <span className="text-sm font-bold text-primary bg-indigo-50 px-3 py-1 rounded-full mb-3 inline-block">{scheme.category}</span>
                   <h3 className="text-xl font-bold mb-2">{scheme.name}</h3>
                   <p className="text-textSecondary mb-4 text-sm">{scheme.benefit}</p>
@@ -211,7 +211,7 @@ const EligibilityFlow = ({ onBack }) => {
             </div>
           </div>
 
-          <div className="text-center mt-10">
+          <div className="text-center mt-10 flow-enter-child" style={{ '--child-i': results.length + 2 }}>
             <button onClick={onBack} className="bg-textPrimary text-white px-8 py-3 rounded-xl font-semibold hover:bg-black transition-colors">
               {t('eligibility.returnHome')}
             </button>
@@ -223,13 +223,14 @@ const EligibilityFlow = ({ onBack }) => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center py-10 px-4 z-50 relative">
-      <div className="w-full max-w-2xl">
-        <div className="flex items-center justify-between mb-8">
-          <button 
+      {/* key forces React to fully unmount/remount this div when tile changes, guaranteeing CSS animations re-trigger */}
+      <div key={`tile-${currentTile}`} className="w-full max-w-2xl flow-enter">
+        <div className="flex items-center justify-between mb-8 flow-enter-child" style={{ '--child-i': 0 }}>
+          <button
             onClick={() => {
               if (currentTile > 1) setCurrentTile(currentTile - 1);
               else onBack();
-            }} 
+            }}
             className="text-textSecondary hover:text-textPrimary flex items-center font-medium transition-colors"
           >
             <FaArrowLeft className="mr-2" /> {t('eligibility.back')}
@@ -239,36 +240,36 @@ const EligibilityFlow = ({ onBack }) => {
           </div>
         </div>
 
-        <div className="bg-white p-6 md:p-10 rounded-3xl shadow-lg border border-gray-100">
+        <div className="bg-white p-6 md:p-10 rounded-3xl shadow-lg border border-gray-100 flow-enter-child" style={{ '--child-i': 1 }}>
           <div className="mb-8 w-full bg-gray-100 h-2 rounded-full overflow-hidden">
             <div className="bg-primary h-full transition-all duration-300" style={{ width: `${(currentTile / 9) * 100}%` }}></div>
           </div>
 
           <div className="space-y-10">
             {visibleQuestions.map((q, idx) => {
-              const isActive = idx === visibleQuestions.length - 1; // Highlight the active interactive question
+              const isActive = idx === visibleQuestions.length - 1;
               return (
                 <div key={q.id} className={`transition-opacity duration-300 ${!isActive ? 'opacity-60' : 'opacity-100'}`}>
-                  <h3 className="text-xl md:text-2xl font-bold text-textPrimary mb-6">{t(`questions.${q.id}.text`)}</h3>
-                  
+                  <h3 className="text-xl md:text-2xl font-bold text-textPrimary mb-6">{q.text}</h3>
+
                   {q.type === 'dropdown' ? (
-                    <select 
+                    <select
                       className="w-full border-2 border-gray-200 rounded-xl p-4 text-lg focus:border-primary focus:ring-0 outline-none transition-colors"
                       value={answers[q.id] || ''}
                       onChange={(e) => handleAnswer(q.id, e.target.value, 'dropdown')}
                     >
-                      <option value="" disabled>{t('eligibility.selectOption')}</option>
+                      <option value="" disabled>Select an option</option>
                       {q.options.map(opt => (
-                         <option key={opt.value || opt} value={opt.value || opt}>
-                           {t(`questions.${q.id}.options.${opt.value || opt}`, { defaultValue: opt.label || opt })}
-                         </option>
+                        <option key={opt.value || opt} value={opt.value || opt}>
+                          {opt.label || opt}
+                        </option>
                       ))}
                     </select>
                   ) : q.type === 'text' ? (
-                    <input 
+                    <input
                       type="text"
                       className="w-full border-2 border-gray-200 rounded-xl p-4 text-lg focus:border-primary focus:ring-0 outline-none transition-colors"
-                      placeholder={t('eligibility.enterAnswer')}
+                      placeholder="Enter your answer"
                       value={answers[q.id] || ''}
                       onChange={(e) => handleAnswer(q.id, e.target.value, 'text')}
                     />
@@ -280,14 +281,13 @@ const EligibilityFlow = ({ onBack }) => {
                           <button
                             key={opt.value || opt}
                             onClick={() => handleAnswer(q.id, opt.value || opt, 'multi_select')}
-                            className={`p-4 border-2 rounded-xl text-left font-semibold transition-all ${
-                              isSelected 
-                                ? 'border-primary bg-indigo-50 text-primary' 
-                                : 'border-gray-200 hover:border-indigo-200 hover:bg-gray-50 text-textSecondary'
-                            }`}
+                            className={`p-4 border-2 rounded-xl text-left font-semibold transition-all ${isSelected
+                              ? 'border-primary bg-indigo-50 text-primary'
+                              : 'border-gray-200 hover:border-indigo-200 hover:bg-gray-50 text-textSecondary'
+                              }`}
                           >
                             <div className="flex items-center justify-between">
-                              <span>{t(`questions.${q.id}.options.${opt.value || opt}`, { defaultValue: opt.label || opt })}</span>
+                              <span>{opt.label || opt}</span>
                               <div className={`w-5 h-5 rounded flex items-center justify-center border ${isSelected ? 'border-primary bg-primary' : 'border-gray-300'}`}>
                                 {isSelected && <FaCheckCircle className="text-white text-xs" />}
                               </div>
@@ -304,13 +304,12 @@ const EligibilityFlow = ({ onBack }) => {
                           <button
                             key={opt.value}
                             onClick={() => handleAnswer(q.id, opt.value, 'single')}
-                            className={`p-4 border-2 rounded-xl text-left font-semibold transition-all ${
-                              isSelected 
-                                ? 'border-primary bg-indigo-50 text-primary scale-[1.02]' 
-                                : 'border-gray-200 hover:border-indigo-200 hover:bg-gray-50 text-textSecondary'
-                            }`}
+                            className={`p-4 border-2 rounded-xl text-left font-semibold transition-all ${isSelected
+                              ? 'border-primary bg-indigo-50 text-primary scale-[1.02]'
+                              : 'border-gray-200 hover:border-indigo-200 hover:bg-gray-50 text-textSecondary'
+                              }`}
                           >
-                            {t(`questions.${q.id}.options.${opt.value}`, { defaultValue: opt.label })}
+                            {opt.label}
                           </button>
                         );
                       })}
@@ -321,15 +320,14 @@ const EligibilityFlow = ({ onBack }) => {
             })}
           </div>
 
-          <div className="mt-12 flex justify-end">
-            <button 
+          <div className="mt-12 flex justify-end flow-enter-child" style={{ '--child-i': visibleQuestions.length + 2 }}>
+            <button
               disabled={!canProceed}
               onClick={proceedNext}
-              className={`flex items-center px-8 py-4 rounded-xl font-bold text-lg transition-all ${
-                canProceed 
-                  ? 'bg-primary text-white hover:shadow-lg hover:-translate-y-1' 
-                  : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-              }`}
+              className={`flex items-center px-8 py-4 rounded-xl font-bold text-lg transition-all ${canProceed
+                ? 'bg-primary text-white hover:shadow-lg hover:-translate-y-1'
+                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                }`}
             >
               {t('eligibility.next')} <FaChevronRight className="ml-2" />
             </button>
