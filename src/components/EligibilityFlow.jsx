@@ -215,7 +215,7 @@ const EligibilityFlow = ({ onBack }) => {
       <div className="min-h-screen bg-gray-50 flex flex-col items-center py-10 px-4 z-50 relative">
         <div key="results" className="w-full max-w-3xl flow-enter">
           <button onClick={() => setIsFinished(false)} className="text-primary flex items-center mb-6 hover:underline font-semibold flow-enter-child" style={{ '--child-i': 0 }}>
-            <FaArrowLeft className="mr-2" /> Back to questions
+            <FaArrowLeft className="mr-2" /> {t('eligibility.backToQuestions')}
           </button>
 
           <div className="bg-white p-6 md:p-10 rounded-2xl shadow-xl border border-gray-100 mb-8 flow-enter-child" style={{ '--child-i': 1 }}>

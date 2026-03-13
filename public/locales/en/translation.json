@@ -116,5 +116,54 @@
     "jal_jeevan": { "name": "Jal Jeevan Mission", "category": "Infrastructure / Welfare", "benefit": "Household tap water connections" },
     "swachh_bharat": { "name": "Swachh Bharat Mission", "category": "Infrastructure / Welfare", "benefit": "Toilet construction support" },
     "digital_india": { "name": "Digital India Mission", "category": "Infrastructure / Welfare", "benefit": "Digital access and services for citizens" }
+  },
+  "faq": {
+    "titleBadge": "FAQs",
+    "title": "Frequently Asked Questions",
+    "q1": {
+      "question": "How do I find the schemes I am eligible for?",
+      "answer": "Simply click \"Check Eligibility\" and answer a few quick questions about your age, occupation, income, and location. Based on your responses, the platform will show government schemes that you may qualify for."
+    },
+    "q2": {
+      "question": "How many questions do I need to answer?",
+      "answer": "You only need to answer a short set of simple questions (about 1–2 minutes). These questions help the system understand your situation and match you with relevant schemes."
+    },
+    "q3": {
+      "question": "Do I need to upload any documents?",
+      "answer": "No. You do not need to upload documents to check your eligibility here. Documents such as Aadhaar card, bank account details, or ration card may only be required when you apply through the official government website."
+    },
+    "q4": {
+      "question": "Is my personal information safe?",
+      "answer": "Yes. The platform only uses your answers to match you with relevant schemes. No sensitive personal data such as Aadhaar numbers or bank details are stored."
+    },
+    "q5": {
+      "question": "What if I am eligible for multiple schemes?",
+      "answer": "If you qualify for multiple government programs, the platform will show all matching schemes along with their benefits so you can explore each option."
+    },
+    "q6": {
+      "question": "Can I still use this platform if I am not sure about my BPL status or income?",
+      "answer": "Yes. If you are unsure about some answers, you can still complete the questionnaire. The platform will try to suggest schemes based on the information you provide."
+    },
+    "q7": {
+      "question": "Does this platform apply for the scheme on my behalf?",
+      "answer": "No. This platform helps you discover schemes you may be eligible for. After viewing the results, you can visit the official government website or application portal to apply."
+    }
+  },
+  "categoryView": {
+    "title": "{{category}} Schemes",
+    "count": "{{count}} schemes available",
+    "noFound": "No schemes found for this category.",
+    "backToHome": "Back to Home",
+    "note": "Note"
+  },
+  "categories": {
+    "Finance": "Finance",
+    "Education": "Education",
+    "Agriculture": "Agriculture",
+    "Health": "Health",
+    "Women": "Women"
+  },
+  "landing": {
+    "viewCategory": "View {{category}} schemes"
   }
 }

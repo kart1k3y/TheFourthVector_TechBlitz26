@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 import schemesData from '../data/schemes.json';
 
-// Map icon categories to scheme categories
+// Map icon categories to scheme categories (English values as they appear in en/translation.json)
 const CATEGORY_MAP = {
-  Finance: ['Financial Inclusion', 'Business / Startup', 'Pension / Social Security'],
-  Education: ['Employment / Skill'],
-  Agriculture: ['Agriculture'],
-  Health: ['Health'],
-  Women: ['Women & Child Welfare'],
+  Finance: ['Financial Inclusion', 'Business / Startup', 'Pension / Social Security', 'Financial'],
+  Education: ['Education', 'Employment / Skill'],
+  Agriculture: ['Agriculture', 'Farming'],
+  Health: ['Health', 'Healthcare'],
+  Women: ['Women', 'Women & Child Welfare'],
 };
 
 const CATEGORY_COLORS = {
@@ -20,13 +21,22 @@ const CATEGORY_COLORS = {
 };
 
 const CategorySchemes = ({ category, icon, onBack }) => {
+  const { t, i18n } = useTranslation();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const schemeCategories = CATEGORY_MAP[category] || [];
-  const schemes = schemesData.schemes.filter(s => schemeCategories.includes(s.category));
+  
+  // Filter schemes by checking their English category name against the map
+  const schemes = schemesData.schemes.filter(s => {
+    const englishCategory = i18n.t(s.scheme_category, { lng: 'en' });
+    return schemeCategories.includes(englishCategory);
+  });
+
   const colors = CATEGORY_COLORS[category] || CATEGORY_COLORS.Finance;
+  const translatedCategory = t(`categories.${category}`);
 
   return (
     <div className="min-h-screen bg-gray-50 z-50 relative">
@@ -44,12 +54,16 @@ const CategorySchemes = ({ category, icon, onBack }) => {
             <div className="flow-enter-child flex items-center gap-3" style={{ '--child-i': 1 }}>
               {icon && (
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white shadow-md flex items-center justify-center">
-                  <img src={icon} alt={category} className="w-6 h-6 md:w-7 md:h-7 object-contain" />
+                  <img src={icon} alt={translatedCategory} className="w-6 h-6 md:w-7 md:h-7 object-contain" />
                 </div>
               )}
               <div>
-                <h1 className="text-xl md:text-2xl font-bold text-textPrimary">{category} Schemes</h1>
-                <p className="text-sm text-textSecondary">{schemes.length} schemes available</p>
+                <h1 className="text-xl md:text-2xl font-bold text-textPrimary">
+                  {t('categoryView.title', { category: translatedCategory })}
+                </h1>
+                <p className="text-sm text-textSecondary">
+                  {t('categoryView.count', { count: schemes.length })}
+                </p>
               </div>
             </div>
           </div>
@@ -65,14 +79,18 @@ const CategorySchemes = ({ category, icon, onBack }) => {
                 style={{ '--child-i': i + 2 }}
               >
                 <div className="flex items-start justify-between gap-3 mb-3">
-                  <h3 className="text-lg md:text-xl font-bold text-textPrimary leading-snug">{scheme.name}</h3>
+                  <h3 className="text-lg md:text-xl font-bold text-textPrimary leading-snug">
+                    {t(scheme.scheme_name)}
+                  </h3>
                   <span className={`flex-shrink-0 text-xs font-bold px-3 py-1 rounded-full ${colors.badge}`}>
-                    {scheme.category}
+                    {t(scheme.scheme_category)}
                   </span>
                 </div>
-                <p className="text-textSecondary text-sm md:text-base leading-relaxed">{scheme.benefit}</p>
+                <p className="text-textSecondary text-sm md:text-base leading-relaxed">
+                  {t(scheme.scheme_benefit)}
+                </p>
                 {scheme.notes && (
-                  <p className="text-xs text-gray-400 mt-2">Note: {scheme.notes}</p>
+                  <p className="text-xs text-gray-400 mt-2">{t('categoryView.note')}: {scheme.notes}</p>
                 )}
               </div>
             ))}
@@ -80,7 +98,7 @@ const CategorySchemes = ({ category, icon, onBack }) => {
 
           {schemes.length === 0 && (
             <div className="flow-enter-child text-center py-20" style={{ '--child-i': 2 }}>
-              <p className="text-textSecondary text-lg">No schemes found for this category.</p>
+              <p className="text-textSecondary text-lg">{t('categoryView.noFound')}</p>
             </div>
           )}
 
@@ -89,7 +107,7 @@ const CategorySchemes = ({ category, icon, onBack }) => {
               onClick={onBack}
               className="bg-textPrimary text-white px-8 py-3 rounded-xl font-semibold hover:bg-black transition-colors"
             >
-              ← Back to Home
+              ← {t('categoryView.backToHome')}
             </button>
           </div>
         </div>
